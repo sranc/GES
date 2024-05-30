@@ -1,0 +1,70 @@
+---
+title: "sistema de reparto cc"
+format: revealjs
+editor: visual
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+pacman::p_load(
+  tidyverse,
+  readxl,
+  dplyr,
+  sparklyr,
+  ggplot2,
+  plotly,
+  DT,
+  scales,
+  arrow,
+  crosstalk,
+  shiny,
+  htmltools,
+  echarts4r,
+  scales
+)
+
+source("functions.R",local = TRUE)
+
+cc_data <- join_gestions(cc_dir)
+
+start_process_data <- process(cc_data,data_type = "inicial")
+compensation_process_data <- process(cc_data,data_type = "certificado",filter_data = "EMISION DE CERTIFICADOS DE CC")
+compensation_AFP_process_data <- process(cc_data,data_type = "certificado",filter_data = "REGISTRO DE CERTIFICADOS DE CC EN LA AFP")
+curso_pago_process_data <- process_n(cc_data, filter_data = "Tipo de CC")
+mont_data <- process_mont(cc_data, filter_data = "Tipo de Renta")
+sex_process_data <- process_sex(cc_data,filter_clase = "Tipo de Renta",filter_bd = "Cantidad")
+altas_futuro <- process_altas(cc_data,filter_tipo = "AFP FUTURO")
+altas_prevision <- process_altas(cc_data,filter_tipo = "AFP PREVISION")
+altas_gestora <- process_altas(cc_data,filter_tipo = "GESTORA PUBLICA")
+```
+
+## N° DE INICIOS DE TRÁMITE DE COMPENSACIÓN DE COTIZACIONES A NIVEL NACIONAL 
+
+```{r}
+bar_graph(start_process_data$bar,
+               process = "start",
+               theme_show = "dark")
+```
+
+```{r}
+data_table(start_process_data$table,source = 'UCC',other = paste0('Monto acumulado al mes de Diciembre ',paste0(altas_gestora$gestions_names,collapse = "-")))
+```
+
+```{r}
+grafico_pie(start_process_data$pie,theme_show = "dark", name_pie = start_process_data$month)
+```
+
+## Bullets
+
+When you click the **Render** button a document will be generated that includes:
+
+-   Content authored with markdown
+-   Output from executable code
+
+## Code
+
+When you click the **Render** button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```

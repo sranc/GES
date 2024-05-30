@@ -1,0 +1,452 @@
+---
+title: "SENASIR"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    vertical_layout: fill
+    css: styles.css
+    theme : 
+      version : 3
+      bg: "#E7E7E7"
+      fg: "#000000" 
+      primary: "#0466C8"
+      navbar-bg: "#023E7D"
+      base_font: 
+        google: Prompt
+      heading_font:
+        google: Sen
+      code_font:
+        google: 
+          # arguments to sass::font_google() 
+          family: JetBrains Mono
+          local: false
+    
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+pacman::p_load(
+  tidyverse,
+  readxl,
+  dplyr,
+  sparklyr,
+  ggplot2,
+  plotly,
+  DT,
+  scales,
+  arrow,
+  crosstalk,
+  shiny,
+  htmltools,
+  echarts4r,
+  scales
+)
+
+source("functions.R",local = TRUE)
+
+cc_data <- join_gestions(cc_dir)
+
+start_process_data <- process(cc_data,data_type = "inicial")
+compensation_process_data <- process(cc_data,data_type = "certificado",filter_data = "EMISION DE CERTIFICADOS DE CC")
+compensation_AFP_process_data <- process(cc_data,data_type = "certificado",filter_data = "REGISTRO DE CERTIFICADOS DE CC EN LA AFP")
+curso_pago_process_data <- process_n(cc_data, filter_data = "Tipo de CC")
+mont_data <- process_mont(cc_data, filter_data = "Tipo de Renta")
+sex_process_data <- process_sex(cc_data,filter_clase = "Tipo de Renta",filter_bd = "Cantidad")
+altas_futuro <- process_altas(cc_data,filter_tipo = "AFP FUTURO")
+altas_prevision <- process_altas(cc_data,filter_tipo = "AFP PREVISION")
+altas_gestora <- process_altas(cc_data,filter_tipo = "GESTORA PUBLICA")
+```
+
+Sistema Reparto { .hidden}
+=======================================================================
+
+{.sidebar}
+-----------------------------------------------------------------------
+
+[Inicio de procesos](#startdata)
+[Certificado de compensación Nacional](#certificado)
+[Certificado de compensación AFP y APS](#certificado_afp)
+[Compensación en curso de pago](#curso_pago)
+[Monto Desembolsado](#monto)
+[Compensación en curso de pago según género](#sexo)
+[Altas AFP Futuro](#alta_futuro)
+[Altas AFP PREVISION](#alta_prevision)
+[Altas Gestora Pública](#alta_gestora)
+
+Row
+-----------------------------------------------------------------------
+
+### 
+
+<img src="../_data/CC.png" alt="Sistema Reparto" style="max-width: 100%;">
+
+Startdata { .hidden}
+=======================================================================
+
+
+ {.sidebar}
+-----------------------------------------------------------------------
+
+[Inicio de procesos](#startdata)
+[Certificado de compensación Nacional](#certificado)
+[Certificado de compensación AFP y APS](#certificado_afp)
+[Compensación en curso de pago](#curso_pago)
+[Monto Desembolsado](#monto)
+[Compensación en curso de pago según género](#sexo)
+[Altas AFP Futuro](#alta_futuro)
+[Altas AFP PREVISION](#alta_prevision)
+[Altas Gestora Pública](#alta_gestora)
+
+Row {data-height=650}
+-----------------------------------------------------------------------
+
+### N° DE INICIOS DE TRÁMITE DE COMPENSACIÓN DE COTIZACIONES A NIVEL NACIONAL 
+
+```{r}
+div(
+  style = "
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('images/bg.jpeg'); 
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-position: center; 
+    height: 100%; 
+    width: 100%; 
+    overflow: hidden;",
+  p(bar_graph(start_process_data$bar,
+               process = "start",
+               theme_show = "dark"))
+)
+
+```
+
+Row {data-height=350}
+-----------------------------------------------------------------------
+
+### {data-width=650}
+
+```{r}
+data_table(start_process_data$table,source = 'UCC',other = paste0('Monto acumulado al mes de Diciembre ',paste0(altas_gestora$gestions_names,collapse = "-")))
+```
+
+###  {data-width=350}
+
+```{r}
+grafico_pie(start_process_data$pie,theme_show = "dark", name_pie = start_process_data$month)
+```
+
+Certificado { .hidden}
+=======================================================================
+
+ {.sidebar}
+-----------------------------------------------------------------------
+
+[Inicio de procesos](#startdata)
+[Certificado de compensación Nacional](#certificado)
+[Certificado de compensación AFP y APS](#certificado_afp)
+[Compensación en curso de pago](#curso_pago)
+[Monto Desembolsado](#monto)
+[Compensación en curso de pago según género](#sexo)
+[Altas AFP Futuro](#alta_futuro)
+[Altas AFP PREVISION](#alta_prevision)
+[Altas Gestora Pública](#alta_gestora)
+
+Row {data-height=650}
+-----------------------------------------------------------------------
+
+### N° DE CERTIFICADOS DE COMPENSACIÓN DE COTIZACIONES, EMITIDOS A NIVEL NACIONAL
+
+```{r}
+bar_graph(compensation_process_data$bar,
+               process = "compensation",
+               theme_show = "dark")
+```
+Row {data-height=350}
+-----------------------------------------------------------------------
+
+### {data-width=650}
+```{r}
+data_table(compensation_process_data$table,source = 'UCC',other = paste0('Monto acumulado al mes de Diciembre ',paste0(altas_gestora$gestions_names,collapse = "-")))
+```
+
+###  {data-width=350}
+
+```{r}
+grafico_pie(compensation_process_data$pie,theme_show = "dark", name_pie = start_process_data$month)
+```
+
+Certificado_afp { .hidden}
+=======================================================================
+
+{.sidebar}
+-----------------------------------------------------------------------
+
+[Inicio de procesos](#startdata) 
+[Certificado de compensación Nacional](#certificado) 
+[Certificado de compensación AFP y APS](#certificado_afp) 
+[Compensación en curso de pago](#curso_pago)
+[Monto Desembolsado](#monto)
+[Compensación en curso de pago según género](#sexo)
+[Altas AFP Futuro](#alta_futuro)
+[Altas AFP PREVISION](#alta_prevision)
+[Altas Gestora Pública](#alta_gestora)
+
+Row {data-height=650}
+-----------------------------------------------------------------------
+
+### N° DE CERTIFICADOS DE COMPENSACIÓN DE COTIZACIONES, REGISTRADOS EN LA APS Y AFP
+
+```{r}
+bar_graph(compensation_AFP_process_data$bar,
+               process = "compensation",
+               theme_show = "dark")
+
+```
+
+Row {data-height=350}
+-----------------------------------------------------------------------
+
+### {data-width=650}
+```{r}
+data_table(compensation_AFP_process_data$table,source = 'UCC',other = paste0('Monto acumulado al mes de Diciembre ',paste0(altas_gestora$gestions_names,collapse = "-")))
+```
+
+###  {data-width=350}
+
+```{r}
+grafico_pie(compensation_AFP_process_data$pie,theme_show = "dark", name_pie = start_process_data$month)
+```
+
+Curso_pago { .hidden}
+=======================================================================
+
+{.sidebar}
+-----------------------------------------------------------------------
+
+[Inicio de procesos](#startdata)
+[Certificado de compensación Nacional](#certificado)
+[Certificado de compensación AFP y APS](#certificado_afp)
+[Compensación en curso de pago](#curso_pago)
+[Monto Desembolsado](#monto)
+[Compensación en curso de pago según género](#sexo)
+[Altas AFP Futuro](#alta_futuro)
+[Altas AFP PREVISION](#alta_prevision)
+[Altas Gestora Pública](#alta_gestora)
+
+Row {data-height=650}
+-----------------------------------------------------------------------
+
+### N° DE BENEFICIARIOS DE LA COMPENSACIÓN DE COTIZACIONES, EN CURSO DE PAGO
+
+```{r}
+graf_curso(curso_pago_process_data$bar,
+               theme_show = "dark")
+```
+Row {data-height=350}
+-----------------------------------------------------------------------
+
+### {data-width=650}
+```{r}
+data_table(curso_pago_process_data$table,source = 'UTI',other = paste0('Monto acumulado al mes de Diciembre ',paste0(altas_gestora$gestions_names,collapse = "-")))
+```
+
+###  {data-width=350}
+
+```{r}
+grafico_pie(curso_pago_process_data$pie,theme_show = "dark", name_pie = curso_pago_process_data$month)
+```
+
+Monto { .hidden}
+=======================================================================
+
+{.sidebar}
+-----------------------------------------------------------------------
+
+[Inicio de procesos](#startdata)
+[Certificado de compensación Nacional](#certificado)
+[Certificado de compensación AFP y APS](#certificado_afp)
+[Compensación en curso de pago](#curso_pago)
+[Monto Desembolsado](#monto)
+[Compensación en curso de pago según género](#sexo)
+[Altas AFP Futuro](#alta_futuro)
+[Altas AFP PREVISION](#alta_prevision)
+[Altas Gestora Pública](#alta_gestora)
+
+Row {data-height=650}
+-----------------------------------------------------------------------
+
+### MONTO DESEMBOLSADO DE LA COMPENSACIÓN DE COTIZACIONES (EXPRESADO EN MILLONES DE BOLIVIANOS)
+
+```{r}
+graf_curso(mont_data$bar,
+               theme_show = "dark",with_total = TRUE)
+```
+Row {data-height=350}
+-----------------------------------------------------------------------
+
+### {data-width=650}
+```{r}
+data_table(mont_data$table,source = 'UTI',other = paste0('Monto acumulado al mes de Diciembre ',paste0(altas_gestora$gestions_names,collapse = "-")))
+```
+
+###  {data-width=350}
+
+```{r}
+grafico_pie(mont_data$pie,theme_show = "dark", name_pie = mont_data$month)
+```
+
+Sexo { .hidden}
+=======================================================================
+
+
+{.sidebar}
+-----------------------------------------------------------------------
+
+[Inicio de procesos](#startdata)
+[Certificado de compensación Nacional](#certificado)
+[Certificado de compensación AFP y APS](#certificado_afp)
+[Compensación en curso de pago](#curso_pago)
+[Monto Desembolsado](#monto)
+[Compensación en curso de pago según género](#sexo)
+[Altas AFP Futuro](#alta_futuro)
+[Altas AFP PREVISION](#alta_prevision)
+[Altas Gestora Pública](#alta_gestora)
+
+Row {data-height=650}
+-----------------------------------------------------------------------
+
+### NÚMERO DE BENEFICIARIOS EN CURSO DE PAGO - SEGÚN EL GÉNERO
+
+```{r}
+graf_sex(sex_process_data$bar,
+               theme_show = "dark")
+```
+Row {data-height=350}
+-----------------------------------------------------------------------
+
+### {data-width=650}
+```{r}
+data_table(sex_process_data$table,source = 'UTI',other = paste0('Monto acumulado al mes de Diciembre ',paste0(sex_process_data$gestions_names,collapse = "-")))
+```
+
+###  {data-width=350}
+
+```{r}
+grafico_pie(sex_process_data$pie,theme_show = "dark", name_pie = sex_process_data$month)
+```
+
+Alta_futuro { .hidden}
+=======================================================================
+
+{.sidebar}
+-----------------------------------------------------------------------
+
+[Inicio de procesos](#startdata)
+[Certificado de compensación Nacional](#certificado)
+[Certificado de compensación AFP y APS](#certificado_afp)
+[Compensación en curso de pago](#curso_pago)
+[Monto Desembolsado](#monto)
+[Compensación en curso de pago según género](#sexo)
+[Altas AFP Futuro](#alta_futuro)
+[Altas AFP PREVISION](#alta_prevision)
+[Altas Gestora Pública](#alta_gestora)
+
+Row {data-height=650}
+-----------------------------------------------------------------------
+
+### ALTAS AFP FUTURO (EXPRESADO EN N° DE BENEFICIARIOS )
+
+```{r}
+graf_four_bars(altas_futuro$bar,with_total = TRUE)
+```
+Row {data-height=350}
+-----------------------------------------------------------------------
+
+### {data-width=650}
+```{r}
+data_table(altas_futuro$table,source = 'UCC',other = paste0('Monto acumulado al mes de Diciembre ',paste0(altas_futuro$gestions_names,collapse = "-")))
+```
+
+###  {data-width=350}
+
+```{r}
+grafico_pie(altas_futuro$pie,theme_show = "dark", name_pie = altas_futuro$month)
+```
+
+Alta_prevision { .hidden}
+=======================================================================
+
+{.sidebar}
+-----------------------------------------------------------------------
+
+[Inicio de procesos](#startdata)
+[Certificado de compensación Nacional](#certificado)
+[Certificado de compensación AFP y APS](#certificado_afp)
+[Compensación en curso de pago](#curso_pago)
+[Monto Desembolsado](#monto)
+[Compensación en curso de pago según género](#sexo)
+[Altas AFP Futuro](#alta_futuro)
+[Altas AFP PREVISION](#alta_prevision)
+[Altas Gestora Pública](#alta_gestora)
+
+Row {data-height=650}
+-----------------------------------------------------------------------
+
+### ALTAS AFP PREVISION (EXPRESADO EN N° DE BENEFICIARIOS )
+
+```{r}
+graf_four_bars(altas_prevision$bar,with_total = TRUE)
+```
+Row {data-height=350}
+-----------------------------------------------------------------------
+
+### {data-width=650}
+```{r}
+data_table(altas_prevision$table,source = 'UCC',other = paste0('Monto acumulado al mes de Diciembre ',paste0(altas_prevision$gestions_names,collapse = "-")))
+```
+
+###  {data-width=350}
+
+```{r}
+grafico_pie(altas_prevision$pie,theme_show = "dark", name_pie = altas_prevision$month)
+```
+
+Alta_gestora { .hidden}
+=======================================================================
+
+{.sidebar}
+-----------------------------------------------------------------------
+
+[Inicio de procesos](#startdata)
+[Certificado de compensación Nacional](#certificado)
+[Certificado de compensación AFP y APS](#certificado_afp)
+[Compensación en curso de pago](#curso_pago)
+[Monto Desembolsado](#monto)
+[Compensación en curso de pago según género](#sexo)
+[Altas AFP Futuro](#alta_futuro)
+[Altas AFP PREVISION](#alta_prevision)
+[Altas Gestora Pública](#alta_gestora)
+
+Row {data-height=650}
+-----------------------------------------------------------------------
+
+### ALTAS GESTORA PÚBLICA (EXPRESADO EN N° DE BENEFICIARIOS) 
+
+```{r}
+graf_four_bars(altas_gestora$bar,with_total = TRUE)
+```
+Row {data-height=350}
+-----------------------------------------------------------------------
+
+### {data-width=650}
+```{r}
+data_table(altas_gestora$table,source = 'UCC',other = paste0('Monto acumulado al mes de Diciembre ',paste0(altas_gestora$gestions_names,collapse = "-")))
+```
+
+###  {data-width=350}
+
+```{r}
+grafico_pie(altas_gestora$pie,theme_show = "dark", name_pie = altas_gestora$month)
+```

@@ -1,0 +1,80 @@
+
+
+
+.section.sidebar {
+     list-style-type: none;
+     background-color: #1B2D5B !important;
+     padding: 0px;
+    }
+.section.sidebar a {
+  display: block;
+  color: #D8BB48;
+  text-decoration: none;
+  padding: 10px 10px;
+  margin: 0;
+  font-size: 16px;
+}
+.section.sidebar a:hover{
+  background-color: #122233;
+  padding-left: 20px;
+}
+
+.navbar-brand {
+  pointer-events: none;
+    padding: 14.5px 79.5px;
+}
+
+.navbar-inverse .navbar-brand {
+  pointer-events: none;
+    color: #D8BB48;
+    font-size: 22px;
+}
+
+.navbar-inverse .navbar-brand .red{
+    color: #a0a020;
+}
+
+.navbar-inverse {
+  display: block;
+    background-color: #1B2D5B;
+    border-color: #5da2ef;
+}
+
+.chart-wrapper a {
+  display: inline;
+  color: #D8BB48;
+  text-decoration: none;
+  padding: 8px 16px;
+  margin: 0;
+  font-size: 16px;
+}
+.chart-wrapper a:hover{
+  background-color: #1B2451;
+  font-size: 18px;
+}
+
+@media screen and (min-width: 768px) {
+  .chart-title {
+  font-size: 20px !important;
+  text-align: center;
+}
+}
+
+/* Tamaño de fuente pequeño para pantallas pequeñas */
+@media screen and (max-width: 767px) {
+  .chart-title {
+  font-size: 12px !important;
+  text-align: center;
+}
+}
+
+h3{
+  font-size: 3em;
+}
+
+/*.panel-custom-bg {
+  background-image: url('bg.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}*/
