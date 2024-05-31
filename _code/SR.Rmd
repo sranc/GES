@@ -246,7 +246,7 @@ Row {data-height=250}
 ```{r}
 data_table(cantMont$table,
            source = 'UTI',
-           other = paste0('Número de población y Monto acumulado al mes de ', 
+           other = paste0('Monto acumulado al mes de ', 
                           monto$month, ' de las gestiones ', 
                           paste0(monto$gestions_names,collapse = "-")))
 ```
@@ -374,7 +374,7 @@ Row {data-height=250}
 ```{r}
 data_table(regular$table,
            source = 'UNO-UTI',
-           other = paste0('Número de población y Monto acumulado al mes de ', 
+           other = paste0('Monto acumulado al mes de ', 
                           monto$month, ' de las gestiones ', 
                           paste0(monto$gestions_names,collapse = "-")))
 ```
@@ -414,7 +414,7 @@ Row {data-height=250}
 ```{r}
 data_table(domicilio$table, 
            source = 'UNO-UTI',
-           other = paste0('Número de población y Monto acumulado al mes de ', 
+           other = paste0('Monto acumulado al mes de ', 
                           monto$month, ' de las gestiones ', 
                           paste0(monto$gestions_names,collapse = "-")))
 ```
@@ -454,7 +454,7 @@ Row {data-height=250}
 ```{r}
 data_table(abono$table,
            source = 'UNO-UTI',
-           other = paste0('Número de población y Monto acumulado al mes de ', 
+           other = paste0('Monto acumulado al mes de ', 
                           monto$month, ' de las gestiones ', 
                           paste0(monto$gestions_names,collapse = "-")))
 ```
@@ -494,7 +494,7 @@ Row {data-height=250}
 ```{r}
 data_table(poder$table,
            source = 'UNO-UTI',
-           other = paste0('Número de población y Monto acumulado al mes de ', 
+           other = paste0('Monto acumulado al mes de ', 
                           monto$month, ' de las gestiones ', 
                           paste0(monto$gestions_names,collapse = "-")))
 ```
