@@ -39,7 +39,8 @@ pacman::p_load(
   shiny,
   htmltools,
   echarts4r,
-  scales
+  base64enc,
+  knitr
 )
 
 source("functions.R",local = TRUE)
@@ -55,6 +56,29 @@ sex_process_data <- process_sex(cc_data,filter_clase = "Tipo de Renta",filter_bd
 altas_futuro <- process_altas(cc_data,filter_tipo = "AFP FUTURO")
 altas_prevision <- process_altas(cc_data,filter_tipo = "AFP PREVISION")
 altas_gestora <- process_altas(cc_data,filter_tipo = "GESTORA PUBLICA")
+
+knitr::include_graphics("images/bg.jpeg")
+img_path <- "images/bg.jpeg"  # Ruta de tu imagen
+img_base64 <- base64enc::base64encode(img_path)
+
+graf_img <- function(graf){
+  div(
+  style = sprintf(
+    "display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    background-image: url('data:image/png;base64,%s'); 
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-position: center; 
+    height: 100%%; 
+    width: 100%%; 
+    overflow: hidden;",
+    img_base64
+  ),
+  p(graf)
+)
+}
 ```
 
 Sistema Reparto { .hidden}
@@ -103,23 +127,8 @@ Row {data-height=650}
 ### N° DE INICIOS DE TRÁMITE DE COMPENSACIÓN DE COTIZACIONES A NIVEL NACIONAL 
 
 ```{r}
-div(
-  style = "
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: url('images/bg.jpeg'); 
-    background-size: cover; 
-    background-repeat: no-repeat; 
-    background-position: center; 
-    height: 100%; 
-    width: 100%; 
-    overflow: hidden;",
-  p(bar_graph(start_process_data$bar,
-               process = "start",
-               theme_show = "dark"))
-)
-
+graf_img(bar_graph(start_process_data$bar,
+               process = "start"))
 ```
 
 Row {data-height=350}
@@ -128,7 +137,11 @@ Row {data-height=350}
 ### {data-width=650}
 
 ```{r}
-data_table(start_process_data$table,source = 'UCC',other = paste0('Monto acumulado al mes de Diciembre ',paste0(altas_gestora$gestions_names,collapse = "-")))
+data_table(start_process_data$table,
+           source = 'UCC',
+           other = paste0('Número de tramites acumulados al mes de ', 
+                          start_process_data$month,' de las gestiones ',
+                          paste0(altas_gestora$gestions_names,collapse = "-")))
 ```
 
 ###  {data-width=350}
@@ -159,16 +172,19 @@ Row {data-height=650}
 ### N° DE CERTIFICADOS DE COMPENSACIÓN DE COTIZACIONES, EMITIDOS A NIVEL NACIONAL
 
 ```{r}
-bar_graph(compensation_process_data$bar,
-               process = "compensation",
-               theme_show = "dark")
+graf_img(bar_graph(compensation_process_data$bar,
+               process = "compensation"))
 ```
 Row {data-height=350}
 -----------------------------------------------------------------------
 
 ### {data-width=650}
 ```{r}
-data_table(compensation_process_data$table,source = 'UCC',other = paste0('Monto acumulado al mes de Diciembre ',paste0(altas_gestora$gestions_names,collapse = "-")))
+data_table(compensation_process_data$table,
+           source = 'UCC',
+           other = paste0('Número de certificados acumulados al mes de ', 
+                          start_process_data$month,' de las gestiones ',
+                          paste0(altas_gestora$gestions_names,collapse = "-")))
 ```
 
 ###  {data-width=350}
@@ -199,9 +215,8 @@ Row {data-height=650}
 ### N° DE CERTIFICADOS DE COMPENSACIÓN DE COTIZACIONES, REGISTRADOS EN LA APS Y AFP
 
 ```{r}
-bar_graph(compensation_AFP_process_data$bar,
-               process = "compensation",
-               theme_show = "dark")
+graf_img(bar_graph(compensation_AFP_process_data$bar,
+               process = "compensation"))
 
 ```
 
@@ -210,7 +225,11 @@ Row {data-height=350}
 
 ### {data-width=650}
 ```{r}
-data_table(compensation_AFP_process_data$table,source = 'UCC',other = paste0('Monto acumulado al mes de Diciembre ',paste0(altas_gestora$gestions_names,collapse = "-")))
+data_table(compensation_AFP_process_data$table,
+           source = 'UCC',
+           other = paste0('Número de certificados acumulados al mes de ', 
+                          start_process_data$month,' de las gestiones ',
+                          paste0(altas_gestora$gestions_names,collapse = "-")))
 ```
 
 ###  {data-width=350}
@@ -241,15 +260,18 @@ Row {data-height=650}
 ### N° DE BENEFICIARIOS DE LA COMPENSACIÓN DE COTIZACIONES, EN CURSO DE PAGO
 
 ```{r}
-graf_curso(curso_pago_process_data$bar,
-               theme_show = "dark")
+graf_img(graf_curso(curso_pago_process_data$bar))
 ```
 Row {data-height=350}
 -----------------------------------------------------------------------
 
 ### {data-width=650}
 ```{r}
-data_table(curso_pago_process_data$table,source = 'UTI',other = paste0('Monto acumulado al mes de Diciembre ',paste0(altas_gestora$gestions_names,collapse = "-")))
+data_table(curso_pago_process_data$table,
+           source = 'UTI',
+           other = paste0('N° de Beneficiarios del mes de ', 
+                          start_process_data$month,' de las gestiones ',
+                          paste0(altas_gestora$gestions_names,collapse = "-")))
 ```
 
 ###  {data-width=350}
@@ -280,15 +302,18 @@ Row {data-height=650}
 ### MONTO DESEMBOLSADO DE LA COMPENSACIÓN DE COTIZACIONES (EXPRESADO EN MILLONES DE BOLIVIANOS)
 
 ```{r}
-graf_curso(mont_data$bar,
-               theme_show = "dark",with_total = TRUE)
+graf_img(graf_curso(mont_data$bar,with_total = TRUE))
 ```
 Row {data-height=350}
 -----------------------------------------------------------------------
 
 ### {data-width=650}
 ```{r}
-data_table(mont_data$table,source = 'UTI',other = paste0('Monto acumulado al mes de Diciembre ',paste0(altas_gestora$gestions_names,collapse = "-")))
+data_table(mont_data$table,
+           source = 'UTI',
+           other = paste0('Monto acumulado al mes de ', 
+                          start_process_data$month,' de las gestiones ',
+                          paste0(altas_gestora$gestions_names,collapse = "-")))
 ```
 
 ###  {data-width=350}
@@ -320,15 +345,18 @@ Row {data-height=650}
 ### NÚMERO DE BENEFICIARIOS EN CURSO DE PAGO - SEGÚN EL GÉNERO
 
 ```{r}
-graf_sex(sex_process_data$bar,
-               theme_show = "dark")
+graf_img(graf_sex(sex_process_data$bar))
 ```
 Row {data-height=350}
 -----------------------------------------------------------------------
 
 ### {data-width=650}
 ```{r}
-data_table(sex_process_data$table,source = 'UTI',other = paste0('Monto acumulado al mes de Diciembre ',paste0(sex_process_data$gestions_names,collapse = "-")))
+data_table(sex_process_data$table,
+           source = 'UTI',
+           other = paste0('Número de población a ', 
+                          start_process_data$month,' de las gestiones ',
+                          paste0(altas_gestora$gestions_names,collapse = "-")))
 ```
 
 ###  {data-width=350}
@@ -359,14 +387,18 @@ Row {data-height=650}
 ### ALTAS AFP FUTURO (EXPRESADO EN N° DE BENEFICIARIOS )
 
 ```{r}
-graf_four_bars(altas_futuro$bar,with_total = TRUE)
+graf_img(graf_four_bars(altas_futuro$bar,with_total = TRUE))
 ```
 Row {data-height=350}
 -----------------------------------------------------------------------
 
 ### {data-width=650}
 ```{r}
-data_table(altas_futuro$table,source = 'UCC',other = paste0('Monto acumulado al mes de Diciembre ',paste0(altas_futuro$gestions_names,collapse = "-")))
+data_table(altas_futuro$table,
+           source = 'UCC',
+           other = paste0('Dato  acumulado al mes de ', 
+                          start_process_data$month,' de las gestiones ',
+                          paste0(altas_gestora$gestions_names,collapse = "-")))
 ```
 
 ###  {data-width=350}
@@ -397,14 +429,18 @@ Row {data-height=650}
 ### ALTAS AFP PREVISION (EXPRESADO EN N° DE BENEFICIARIOS )
 
 ```{r}
-graf_four_bars(altas_prevision$bar,with_total = TRUE)
+graf_img(graf_four_bars(altas_prevision$bar,with_total = TRUE))
 ```
 Row {data-height=350}
 -----------------------------------------------------------------------
 
 ### {data-width=650}
 ```{r}
-data_table(altas_prevision$table,source = 'UCC',other = paste0('Monto acumulado al mes de Diciembre ',paste0(altas_prevision$gestions_names,collapse = "-")))
+data_table(altas_prevision$table,
+           source = 'UCC',
+           other = paste0('Dato  acumulado al mes de ', 
+                          start_process_data$month,' de las gestiones ',
+                          paste0(altas_gestora$gestions_names,collapse = "-")))
 ```
 
 ###  {data-width=350}
@@ -435,14 +471,18 @@ Row {data-height=650}
 ### ALTAS GESTORA PÚBLICA (EXPRESADO EN N° DE BENEFICIARIOS) 
 
 ```{r}
-graf_four_bars(altas_gestora$bar,with_total = TRUE)
+graf_img(graf_four_bars(altas_gestora$bar,with_total = TRUE))
 ```
 Row {data-height=350}
 -----------------------------------------------------------------------
 
 ### {data-width=650}
 ```{r}
-data_table(altas_gestora$table,source = 'UCC',other = paste0('Monto acumulado al mes de Diciembre ',paste0(altas_gestora$gestions_names,collapse = "-")))
+data_table(altas_gestora$table,
+           source = 'UCC',
+           other = paste0('Dato  acumulado al mes de ', 
+                          start_process_data$month,' de las gestiones ',
+                          paste0(altas_gestora$gestions_names,collapse = "-")))
 ```
 
 ###  {data-width=350}

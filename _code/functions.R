@@ -531,7 +531,7 @@ bar_graph <- function(data, process = "start", theme_show = "default") {
   if (process != "cursoPago") {
     graf <- graf %>% 
       e_line(TOTAL, 
-             itemStyle = list(width=10, color = "#f2f2f2"), 
+             itemStyle = list(width=10, color = "#202C33"), 
              symbol = "diamond", 
              symbolSize = 10, 
              label = list(show = TRUE, 
@@ -567,7 +567,14 @@ bar_graph <- function(data, process = "start", theme_show = "default") {
     e_toolbox_feature(feature = "saveAsImage") |>
     # Configura leyenda
     e_legend(orient = "horizontal", top = "bottom", padding = c(0,0)) %>% 
-    e_animation(duration = 1500) 
+    e_animation(duration = 1500) |>
+    # Marca el área de las barras
+    e_mark_area(data = list(list(xAxis = 0),
+                            list(xAxis = 1)
+    ),
+    itemStyle = list(color = color_mark,
+                     opacity = 0.1)
+    )
   
   return(graf)
 }
@@ -614,7 +621,7 @@ graf_curso <- function(data,theme_show = "dark",with_total = FALSE){
   if (with_total == TRUE) {
     grafi <- grafi %>% 
       e_line(TOTAL, 
-             itemStyle = list(width=10, color = "#f2f2f2"), 
+             itemStyle = list(width=10, color = "#202C33"), 
              symbol = "diamond", 
              symbolSize = 10, 
              label = list(show = TRUE, 
@@ -695,7 +702,7 @@ graf_sex <- function(data,theme_show = "dark",with_total = FALSE){
   if (with_total == TRUE) {
     grafi <- grafi %>% 
       e_line(TOTAL, 
-             itemStyle = list(width=10, color = "#f2f2f2"), 
+             itemStyle = list(width=10, color = "#202C33"), 
              symbol = "diamond", 
              symbolSize = 10, 
              label = list(show = TRUE, 
@@ -844,7 +851,7 @@ graf_four_bars <- function(data,theme_show = "dark",with_total = FALSE){
   if (with_total == TRUE) {
     grafi <- grafi %>% 
       e_line(TOTAL, 
-             itemStyle = list(width=10, color = "#f2f2f2"), 
+             itemStyle = list(width=10, color = "#202C33"), 
              symbol = "diamond", 
              symbolSize = 10, 
              label = list(show = TRUE, 
@@ -883,7 +890,7 @@ graf_four_bars <- function(data,theme_show = "dark",with_total = FALSE){
   return(grafi)
 }
 
-data_table <- function(table,source,prepared = 'Area de planificación',other){
+data_table <- function(table,source,prepared = 'Area de planificación',other,title_other = '(*): '){
  n <- ncol(table)
  result <- datatable(head(table),
             extensions = c('Select','FixedColumns'),
@@ -905,9 +912,11 @@ data_table <- function(table,source,prepared = 'Area de planificación',other){
             rownames = FALSE,
             caption = htmltools::tags$caption(
               style = 'caption-side: bottom; text-align: left;',
-              'Fuente: ', htmltools::em(source),
-              'Elaborado: ', htmltools::em(prepared),
-              '(*): ', htmltools::em(other)
+              htmltools::strong('Fuente : '), htmltools::em(source),
+              htmltools::br(),
+              htmltools::strong('Elaborado: '), htmltools::em(prepared),
+              htmltools::br(),
+              htmltools::strong(title_other), htmltools::em(other)
             )
   )
  return(result)

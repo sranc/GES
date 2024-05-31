@@ -731,7 +731,7 @@ graf_pago <- function(data,theme_show = theme_graf, total = TRUE){
 
 ###############################################      tabla    ################################################
 
-data_table <- function(table,source,prepared = 'Area de planificación',other,title_other = '(*): '){
+data_table <- function(table,source,prepared = 'Area de planificación',other,title_other = '(*) '){
   n <- ncol(table)
   result <- datatable(head(table),
                       extensions = c('Select','FixedColumns'),
