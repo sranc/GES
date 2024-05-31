@@ -70,6 +70,7 @@ poder <- reparto(cc_data,filter_bd = c("Cantidad","Monto"),
                      filter_tipo = "Pago con Poder", type_resp = "pagos_beneficiarios")
 anexo <- reparto(cc_data,filter_bd = "Estadistica", 
                      filter_tipo = c("IMPEDIMENTO","HOSPITALIZACIÓN","FALLECIMIENTO") , type_resp = "anexo")
+
 knitr::include_graphics("images/bg.jpeg")
 img_path <- "images/bg.jpeg"  # Ruta de tu imagen
 img_base64 <- base64enc::base64encode(img_path)
