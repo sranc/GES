@@ -38,10 +38,8 @@ pacman::p_load(
   shiny,
   htmltools,
   echarts4r,
-  scales,
   kableExtra,
   base64enc,
-  htmltools,
   knitr
 )
 
