@@ -104,14 +104,14 @@ Sistema Reparto { .hidden}
 
 [Número Beneficiarios](#beneficiarios)
 [Monto Desembolsado](#montos)
-[Monto vs beneficiario](#montobeneficiario)
-[N° beneficiario segun género](#genero)
-[N° beneficiario por departamento](#departamento)
-[Planilla de pago regular](#regular)
-[planillas de pago a domicilio](#domicilio)
-[Planillas abono a cuenta](#abono)
-[planillas pago con poder](#poder)
-[Formulario de autorización de pago (ANEXO 15) ](#autorizacion)
+[Monto vs Beneficiario](#montobeneficiario)
+[N° Beneficiario segun Género](#genero)
+[N° Beneficiario por Departamento](#departamento)
+[Planilla de Pago Regular](#regular)
+[Planillas de Pago a Domicilio](#domicilio)
+[Planillas Abono a Cuenta](#abono)
+[Planillas Pago con Poder](#poder)
+[Formulario de Autorización de Pago (ANEXO 15) ](#autorizacion)
 
 Row
 -----------------------------------------------------------------------
