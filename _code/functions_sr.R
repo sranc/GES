@@ -310,11 +310,11 @@ graf_titular_derecho <- function(data,theme_show = theme_graf,with_total = FALSE
       e_line(TOTAL, 
              itemStyle = list(width=10, color = "#FFC502"), 
              symbol = "diamond", 
-             symbolSize = 10, 
+             symbolSize = 12, 
              label = list(show = TRUE, 
                           position = "top", 
                           fontWeight = "bold", 
-                          color = "#FFF502",
+                          color = "#BF8500",
                           fontSize = 16,
                           formatter  =  htmlwidgets::JS("
                               function(params){
@@ -324,7 +324,7 @@ graf_titular_derecho <- function(data,theme_show = theme_graf,with_total = FALSE
                                 return parts.join('.');
                               }
                               ")),
-             lineStyle = list(width = 2))
+             lineStyle = list(width = 3))
   }
   
   grafi <- grafi %>% 
@@ -383,11 +383,11 @@ graf_cantidad_monto <- function(data,theme_show = theme_graf){
     e_line(MONTO, 
            itemStyle = list(width=10, color = "#FFC502"), 
            symbol = "diamond", 
-           symbolSize = 10, 
+           symbolSize = 12, 
            label = list(show = TRUE, 
                         position = "top", 
                         fontWeight = "bold", 
-                        color = "#FFF502",
+                        color = "#BF8500",
                         fontSize = 16,
                         formatter  =  htmlwidgets::JS("
                               function(params){
@@ -397,7 +397,7 @@ graf_cantidad_monto <- function(data,theme_show = theme_graf){
                                 return parts.join('.');
                               }
                               ")),
-           lineStyle = list(width = 2),
+           lineStyle = list(width = 3),
            y_index = 1)
   
   grafi <- grafi %>% 
@@ -686,13 +686,13 @@ graf_pago <- function(data,theme_show = theme_graf, total = TRUE){
   if(total == TRUE){
     grafi <- grafi %>% 
       e_line(Monto_sim, 
-             itemStyle = list(width=10, color = "#FFC502"), 
+             itemStyle = list(width=20, color = "#FFC502"), 
              symbol = "diamond", 
-             symbolSize = 10, 
+             symbolSize = 12, 
              label = list(show = TRUE, 
                           position = "top", 
                           fontWeight = "bold", 
-                          color = "#FFF502",
+                          color = "#BF8500",
                           fontSize = 16,
                           formatter  =  htmlwidgets::JS("
                               function(params){
@@ -703,7 +703,7 @@ graf_pago <- function(data,theme_show = theme_graf, total = TRUE){
                                 value_format
                               ) }
                               ")),
-             lineStyle = list(width = 2),
+             lineStyle = list(width = 3),
              y_index = 1)
   }
   
@@ -731,7 +731,7 @@ graf_pago <- function(data,theme_show = theme_graf, total = TRUE){
 
 ###############################################      tabla    ################################################
 
-data_table <- function(table,source,prepared = 'Area de planificación',other){
+data_table <- function(table,source,prepared = 'Area de planificación',other,title_other = '(*): '){
   n <- ncol(table)
   result <- datatable(head(table),
                       extensions = c('Select','FixedColumns'),
@@ -757,7 +757,7 @@ data_table <- function(table,source,prepared = 'Area de planificación',other){
                         htmltools::br(),
                         htmltools::strong('Elaborado: '), htmltools::em(prepared),
                         htmltools::br(),
-                        htmltools::strong('(*): '), htmltools::em(other)
+                        htmltools::strong(title_other), htmltools::em(other)
                       )
   )
   return(result)

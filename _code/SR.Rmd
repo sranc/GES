@@ -1,5 +1,5 @@
 ---
-title: "Reparto"
+title: "Sistema Reparto"
 output: 
   flexdashboard::flex_dashboard:
     orientation: rows
@@ -39,7 +39,10 @@ pacman::p_load(
   htmltools,
   echarts4r,
   scales,
-  kableExtra
+  kableExtra,
+  base64enc,
+  htmltools,
+  knitr
 )
 
 source("functions_sr.R",local = TRUE)
@@ -67,6 +70,29 @@ poder <- reparto(cc_data,filter_bd = c("Cantidad","Monto"),
                      filter_tipo = "Pago con Poder", type_resp = "pagos_beneficiarios")
 anexo <- reparto(cc_data,filter_bd = "Estadistica", 
                      filter_tipo = c("IMPEDIMENTO","HOSPITALIZACIÓN","FALLECIMIENTO") , type_resp = "anexo")
+knitr::include_graphics("images/bg.jpeg")
+img_path <- "images/bg.jpeg"  # Ruta de tu imagen
+img_base64 <- base64enc::base64encode(img_path)
+
+graf_img <- function(graf){
+  div(
+  style = sprintf(
+    "display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    background-image: url('data:image/png;base64,%s'); 
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-position: center; 
+    height: 100%%; 
+    width: 100%%; 
+    overflow: hidden;",
+    img_base64
+  ),
+  p(graf)
+)
+}
+
 ```
 
 Sistema Reparto { .hidden}
@@ -117,20 +143,7 @@ Row {data-height=650}
 ### N° DE BENEFICIARIOS DE RENTAS Y PENSIONES VITALICIAS DEL SISTEMA DE REPARTO
 
 ```{r}
-div(
-  style = "
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: url('images/bg.jpeg'); 
-    background-size: cover; 
-    background-repeat: no-repeat; 
-    background-position: center; 
-    height: 100%; 
-    width: 100%; 
-    overflow: hidden;",
-  p(graf_titular_derecho(cantidad$bar, with_total = TRUE))
-)
+graf_img(graf_titular_derecho(cantidad$bar, with_total = TRUE))
 ```
 
 Row {data-height=250}
@@ -139,13 +152,18 @@ Row {data-height=250}
 ### {data-width=650}
 
 ```{r}
-data_table(cantidad$table,source = 'UTI',other = paste0('Monto acumulado al mes de Diciembre ',paste0(cantidad$gestions_names,collapse = "-")))
+data_table(cantidad$table,
+           source = 'UTI',
+           other = paste0('Número de población del mes de ', 
+                          monto$month,' de las gestiones ',
+                          paste0(cantidad$gestions_names,collapse = "-")))
 ```
 
 ###  {data-width=350}
 
 ```{r}
-grafico_pie(cantidad$pie, name_pie = cantidad$month)
+#grafico_pie(cantidad$pie, name_pie = cantidad$month)
+grafico_pie(genero$pie, name_pie = monto$month)
 ```
 
 Montos { .hidden}
@@ -172,21 +190,7 @@ Row {data-height=650}
 ### MONTO DESEMBOLSADO DE RENTAS Y PENSIONES VITALICIAS DEL SISTEMA DE REPARTO (EXPRESADO EN MILLONES DE BOLIVIANOS)
 
 ```{r}
-div(
-  style = "
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: url('images/bg.jpeg'); 
-    background-size: cover; 
-    background-repeat: no-repeat; 
-    background-position: center; 
-    height: 100%; 
-    width: 100%; 
-    overflow: hidden;",
-  p(graf_titular_derecho(monto$bar,with_total = TRUE))
-)
-
+graf_img(graf_titular_derecho(monto$bar,with_total = TRUE))
 ```
 
 Row {data-height=250}
@@ -195,7 +199,11 @@ Row {data-height=250}
 ### {data-width=650}
 
 ```{r}
-data_table(monto$table,source = 'UTI',other = paste0('Monto acumulado al mes de Diciembre ',paste0(monto$gestions_names,collapse = "-")))
+data_table(monto$table,
+           source = 'UTI',
+           other = paste0('Monto acumulado al mes de ', 
+                          monto$month,' de las gestiones ', 
+                          paste0(monto$gestions_names,collapse = "-")))
 ```
 
 ###  {data-width=350}
@@ -228,21 +236,7 @@ Row {data-height=650}
 ### MONTO DESEMBOLSADO Y N° DE BENEFICIARIOS DEL SISTEMA DE REPARTO
 
 ```{r}
-div(
-  style = "
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: url('images/bg.jpeg'); 
-    background-size: cover; 
-    background-repeat: no-repeat; 
-    background-position: center; 
-    height: 100%; 
-    width: 100%; 
-    overflow: hidden;",
-  p(graf_cantidad_monto(cantMont$bar))
-)
-
+graf_img(graf_cantidad_monto(cantMont$bar))
 ```
 
 Row {data-height=250}
@@ -251,7 +245,11 @@ Row {data-height=250}
 ### 
 
 ```{r}
-data_table(cantMont$table,source = 'UTI',other = paste0('Monto acumulado al mes de Diciembre ',paste0(monto$gestions_names,collapse = "-")))
+data_table(cantMont$table,
+           source = 'UTI',
+           other = paste0('Número de población y Monto acumulado al mes de ', 
+                          monto$month, ' de las gestiones ', 
+                          paste0(monto$gestions_names,collapse = "-")))
 ```
 
 Genero { .hidden}
@@ -278,21 +276,7 @@ Row {data-height=650}
 ### N° DE BENEFICIARIOS DEL SISTEMA DE REPARTO – SEGÚN EL GÉNERO
 
 ```{r}
-div(
-  style = "
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: url('images/bg.jpeg'); 
-    background-size: cover; 
-    background-repeat: no-repeat; 
-    background-position: center; 
-    height: 100%; 
-    width: 100%; 
-    overflow: hidden;",
-  p(graf_sexo(genero$bar))
-)
-
+graf_img(graf_sexo(genero$bar))
 ```
 
 Row {data-height=250}
@@ -301,7 +285,11 @@ Row {data-height=250}
 ### {data-width=650}
 
 ```{r}
-data_table(genero$table,source = 'UTI',other = paste0('Monto acumulado al mes de Diciembre ',paste0(genero$gestions_names,collapse = "-")))
+data_table(genero$table,
+           source = 'UTI',
+           other = paste0('Número de población del mes de ', 
+                          monto$month, ' de las gestiones', 
+                          paste0(genero$gestions_names,collapse = "-")))
 ```
 
 ###  {data-width=350}
@@ -334,21 +322,7 @@ Row {data-height=650}
 ### N° DE BENEFICIARIOS POR DEPARTAMENTO (MES DE `r toupper(monto$month) `)
 
 ```{r}
-div(
-  style = "
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: url('images/bg.jpeg'); 
-    background-size: cover; 
-    background-repeat: no-repeat; 
-    background-position: center; 
-    height: 100%; 
-    width: 100%; 
-    overflow: hidden;",
-  p(graf_departamento(departamento$bar))
-)
-
+graf_img(graf_departamento(departamento$bar))
 ```
 
 Row {data-height=250}
@@ -390,21 +364,7 @@ Row {data-height=650}
 ### PLANILLAS DE PAGO REGULAR DEL SERVICIO NACIONAL DEL SISTEMA DE REPARTO (EXPRESADO EN MILLONES DE BOLIVIANOS) 
 
 ```{r}
-div(
-  style = "
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: url('images/bg.jpeg'); 
-    background-size: cover; 
-    background-repeat: no-repeat; 
-    background-position: center; 
-    height: 100%; 
-    width: 100%; 
-    overflow: hidden;",
-  p(graf_pago(regular$bar))
-)
-
+graf_img(graf_pago(regular$bar))
 ```
 
 Row {data-height=250}
@@ -413,7 +373,11 @@ Row {data-height=250}
 ### 
 
 ```{r}
-data_table(regular$table,source = 'UNO-UTI',other = paste0('Monto acumulado al mes de Diciembre ',paste0(monto$gestions_names,collapse = "-")))
+data_table(regular$table,
+           source = 'UNO-UTI',
+           other = paste0('Número de población y Monto acumulado al mes de ', 
+                          monto$month, ' de las gestiones ', 
+                          paste0(monto$gestions_names,collapse = "-")))
 ```
 
 Domicilio { .hidden}
@@ -440,20 +404,7 @@ Row {data-height=650}
 ### PLANILLAS DE PAGO A DOMICILIO DEL SERVICIO NACIONAL DEL SISTEMA DE REPARTO (EXPRESADO EN MILLONES DE BOLIVIANOS) 
 
 ```{r}
-div(
-  style = "
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: url('images/bg.jpeg'); 
-    background-size: cover; 
-    background-repeat: no-repeat; 
-    background-position: center; 
-    height: 100%; 
-    width: 100%; 
-    overflow: hidden;",
-  p(graf_pago(domicilio$bar))
-)
+graf_img(graf_pago(domicilio$bar))
 ```
 
 Row {data-height=250}
@@ -462,7 +413,11 @@ Row {data-height=250}
 ### 
 
 ```{r}
-data_table(domicilio$table,source = 'UNO-UTI',other = paste0('Monto acumulado al mes de Diciembre ',paste0(monto$gestions_names,collapse = "-")))
+data_table(domicilio$table, 
+           source = 'UNO-UTI',
+           other = paste0('Número de población y Monto acumulado al mes de ', 
+                          monto$month, ' de las gestiones ', 
+                          paste0(monto$gestions_names,collapse = "-")))
 ```
 
 Abono { .hidden}
@@ -489,20 +444,7 @@ Row {data-height=650}
 ### PLANILLAS DE ABONO A CUENTA DEL SERVICIO NACIONAL DEL SISTEMA DE REPARTO (EXPRESADO EN MILLONES DE BOLIVIANOS) 
 
 ```{r}
-div(
-  style = "
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: url('images/bg.jpeg'); 
-    background-size: cover; 
-    background-repeat: no-repeat; 
-    background-position: center; 
-    height: 100%; 
-    width: 100%; 
-    overflow: hidden;",
-  p(graf_pago(abono$bar))
-)
+graf_img(graf_pago(abono$bar))
 ```
 
 Row {data-height=250}
@@ -511,7 +453,11 @@ Row {data-height=250}
 ### 
 
 ```{r}
-data_table(abono$table,source = 'UNO-UTI',other = paste0('Monto acumulado al mes de Diciembre ',paste0(monto$gestions_names,collapse = "-")))
+data_table(abono$table,
+           source = 'UNO-UTI',
+           other = paste0('Número de población y Monto acumulado al mes de ', 
+                          monto$month, ' de las gestiones ', 
+                          paste0(monto$gestions_names,collapse = "-")))
 ```
 
 Poder { .hidden}
@@ -538,20 +484,7 @@ Row {data-height=650}
 ### PLANILLAS DE PAGO CON PODER DEL SERVICIO NACIONAL DEL SISTEMA DE REPARTO (EXPRESADO EN MILLONES DE BOLIVIANOS)
 
 ```{r}
-div(
-  style = "
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: url('images/bg.jpeg'); 
-    background-size: cover; 
-    background-repeat: no-repeat; 
-    background-position: center; 
-    height: 100%; 
-    width: 100%; 
-    overflow: hidden;",
-  p(graf_pago(poder$bar))
-)
+graf_img(graf_pago(poder$bar))
 ```
 
 Row {data-height=250}
@@ -560,7 +493,11 @@ Row {data-height=250}
 ### 
 
 ```{r}
-data_table(poder$table,source = 'UNO-UTI',other = paste0('Monto acumulado al mes de Diciembre ',paste0(monto$gestions_names,collapse = "-")))
+data_table(poder$table,
+           source = 'UNO-UTI',
+           other = paste0('Número de población y Monto acumulado al mes de ', 
+                          monto$month, ' de las gestiones ', 
+                          paste0(monto$gestions_names,collapse = "-")))
 ```
 
 Autorizacion { .hidden}
@@ -587,20 +524,7 @@ Row {data-height=650}
 ### FORMULARIO ÚNICO DE AUTORIZACIÓN DE PAGO (ANEXO 15) DEL SERVICIO NACIONAL DEL SISTEMA DE REPARTO (EXPRESADO EN N° DE BENEFICIARIOS )
 
 ```{r}
-div(
-  style = "
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: url('images/bg.jpeg'); 
-    background-size: cover; 
-    background-repeat: no-repeat; 
-    background-position: center; 
-    height: 100%; 
-    width: 100%; 
-    overflow: hidden;",
-  p(graf_pago(anexo$bar,total = FALSE))
-)
+graf_img(graf_pago(anexo$bar,total = FALSE))
 ```
 
 Row {data-height=250}
@@ -609,5 +533,8 @@ Row {data-height=250}
 ### 
 
 ```{r}
-data_table(anexo$table,source = 'UNO',other = paste0('Monto acumulado al mes de Diciembre ',paste0(anexo$gestions_names,collapse = "-")))
+data_table(anexo$table,
+           source = 'UNO',
+           other = 'Comprende impedimento, hospitalización y fallecimiento',
+           title_other = 'Anexo 15: ')
 ```
