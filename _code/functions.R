@@ -1,7 +1,7 @@
 # directorios de las distintas areas
 
 cc_dir <- "../_data/cc/data"
-
+color_mark <-  "#001233"
 
 # join_gestions: Función que combina datos de archivos Parquet en un solo data frame.
 # Parámetros:
@@ -52,11 +52,11 @@ get_data_graf <- function(data,ges_pass = FALSE, MES = "DIC"){
     dic_lastgestion_1 <- data %>% 
       filter(gestion == max(gestion) - 1 & mes == MES) %>% 
       mutate(mes = paste(paste("(*)",mes), gestion, sep = "_"))
-    
+   # view(dic_lastgestion_1)
     dic_lastgestion_2 <- data %>% 
       filter(gestion == max(gestion) - 2 & mes == MES) %>% 
       mutate(mes = paste(paste("(*)",mes), gestion, sep = "_"))
-    
+   # view(dic_lastgestion_2)
     new_data <- rbind(dic_lastgestion_2,dic_lastgestion_1,new_data)
   }
   return(new_data)
@@ -81,7 +81,9 @@ mes_selector <- function(mes){
 }
 
 data_to_show <- function(data,init,fin,fin_2 = NULL){
-  bar <- get_data_graf(data,TRUE)
+  mes = toString(tail(data,1)$mes)
+  
+  bar <- get_data_graf(data,TRUE,MES = mes)
   table_data <- data_format_convert(bar,col_ini = init,col_fin = fin,names = "TIPO",values = "CANTIDAD" )
   table_data <- table_data %>% 
     select(TIPO,MES=mes,CANTIDAD) %>% 
@@ -164,8 +166,9 @@ start_process <- function(cc_data){
   
   resultado <- data_format_convert(resultado,"large")
   resultado <- data_format_convert(resultado,"short",names = "tipo_CC")
+  mes = toString(tail(resultado,1)$mes)
   
-  bar <- get_data_graf(resultado,TRUE)
+  bar <- get_data_graf(resultado,TRUE,MES = mes)
   
   table_data <- data_format_convert(bar,col_ini = "OFICINA_CENTRAL",col_fin = "TOTAL",names = "TIPO",values = "CANTIDAD" )
   table_data <- table_data %>% 
@@ -214,8 +217,9 @@ compensation_process <- function(cc_data){
   
   resultado <- data_format_convert(resultado,"large")
   resultado <- data_format_convert(resultado,"short",names = "tipo_CC")
+  mes = toString(tail(resultado,1)$mes)
   
-  bar <- get_data_graf(resultado,TRUE)
+  bar <- get_data_graf(resultado,TRUE,MES = mes)
   
   table_data <- data_format_convert(bar,col_ini = "MENSUAL",col_fin = "TOTAL",names = "TIPO",values = "CANTIDAD" )
   table_data <- table_data %>% 
@@ -312,7 +316,7 @@ process <- function(cc_data,data_type,filter_data = " "){
   return(list("bar" = bar,"table" = table_data,"pie" = pie_data,"month" = get_name))
 }
 
-process_n <- function(cc_data,filter_data){
+process_n <- function(cc_data,filter_data, mes = "DIC"){
   resultado <- cc_data %>% 
     filter(clase == filter_data) %>% 
     select(-bd,-clase,-tipo) %>%
@@ -325,7 +329,8 @@ process_n <- function(cc_data,filter_data){
   resultado <- data_format_convert(resultado,"large")
   resultado <- data_format_convert(resultado,"short",names = "tipo_CC") %>% 
     rename(MENSUAL = Mensual, GLOBAL = Global) 
-  bar <- get_data_graf(resultado,TRUE) %>% 
+  
+  bar <- get_data_graf(resultado,TRUE,MES = mes) %>% 
     filter(MENSUAL > 0)
   table_data <- data_format_convert(bar,col_ini = "GLOBAL",col_fin = "MENSUAL",names = "TIPO",values = "CANTIDAD" )
   table_data <- table_data %>% 
@@ -364,8 +369,8 @@ process_mont <- function(cc_data,filter_data = " "){
     mutate(TOTAL = GLOBAL + MENSUAL) %>% 
     ungroup() %>% 
     select(gestion,mes,MENSUAL,GLOBAL,TOTAL)
-
-  bar <- get_data_graf(result,TRUE)
+  mes = toString(tail(result,1)$mes)
+  bar <- get_data_graf(result,TRUE,MES = mes)
   table_data <- data_format_convert(bar,col_ini = data_1,col_fin = "TOTAL",names = "TIPO",values = "CANTIDAD" )
   table_data <- table_data %>% 
     select(TIPO,MES=mes,CANTIDAD) %>% 
@@ -414,6 +419,7 @@ process_altas <- function(data,filter_tipo = NULL,filter_clase = NULL,filter_bd 
     filter(if (!is.null(filter_tipo_cc)) tipo_CC %in% filter_tipo_cc else TRUE) %>%
     mutate(tipo_CC = toupper(tipo_CC)) %>% 
     select(-bd,-clase,-tipo) 
+  view(result)
   result <- result %>% 
     mutate(tipo_CC = gsub(" ","_",tipo_CC)) %>% 
     mutate(tipo_CC = iconv(tipo_CC, to = "ASCII//TRANSLIT"))
@@ -434,6 +440,7 @@ process_altas <- function(data,filter_tipo = NULL,filter_clase = NULL,filter_bd 
            AUTOMATICO_MENSUAL=cumsum(AUTOMATICO_MENSUAL)) %>% 
     ungroup() %>% 
     mutate(TOTAL = MANUAL_GLOBAL+MANUAL_MENSUAL+AUTOMATICO_GLOBAL+AUTOMATICO_MENSUAL)
+  
   return(data_to_show(result,init = "MANUAL_GLOBAL",fin = "TOTAL",fin_2 = "AUTOMATICO_MENSUAL")) 
 }
   # Crea un gráfico de barras
@@ -462,6 +469,8 @@ bar_graph <- function(data, process = "start", theme_show = "default") {
                               shadowBlur = 20),
             stack = "grp",
             label = list(show = TRUE,
+                         fontWeight = "bold", 
+                         fontSize = 16,
                          formatter  =  htmlwidgets::JS("
                             function(params){
                               var value = params.value[1];
@@ -479,6 +488,8 @@ bar_graph <- function(data, process = "start", theme_show = "default") {
                              shadowBlur = 10),
             stack = "grp",
             label = list(show = TRUE,
+                         fontWeight = "bold", 
+                         fontSize = 16,
                          formatter  = htmlwidgets::JS("
                             function(params){
                               var value = params.value[1];
@@ -498,6 +509,8 @@ bar_graph <- function(data, process = "start", theme_show = "default") {
                               shadowBlur = 20),
             stack = "grp",
             label = list(show = TRUE,
+                         fontWeight = "bold", 
+                         fontSize = 16,
                          formatter  =  htmlwidgets::JS("
                             function(params){
                               var value = params.value[1];
@@ -515,6 +528,8 @@ bar_graph <- function(data, process = "start", theme_show = "default") {
                              shadowBlur = 10),
             stack = "grp",
             label = list(show = TRUE,
+                         fontWeight = "bold", 
+                         fontSize = 16,
                          formatter  =  htmlwidgets::JS("
                             function(params){
                               var value = params.value[1];
@@ -537,7 +552,7 @@ bar_graph <- function(data, process = "start", theme_show = "default") {
              label = list(show = TRUE, 
                           position = "top", 
                           fontWeight = "bold", 
-                          fontSize = 16,
+                          fontSize = 18,
                           formatter  =  htmlwidgets::JS("
                               function(params){
                               var value = params.value[1];
@@ -590,7 +605,20 @@ graf_curso <- function(data,theme_show = "dark",with_total = FALSE){
                             borderRadius = 15,
                             shadowColor = "black",
                             shadowBlur = 20),
-          stack = "grp")
+          stack = "grp",
+          label = list(show = TRUE,
+                       fontWeight = "bold", 
+                       fontSize = 16,
+                       color = "#073767",
+                       backgroundColor = "#FFC502",
+                       formatter  =  htmlwidgets::JS("
+                            function(params){
+                              var value = params.value[1];
+                              var parts = value.toString().split('.');
+                              parts[0] = parts[0].replace(/\\B(?=(\\d{3})+(?!\\d))/g, ',');
+                              return parts.join('.');
+                            }
+                            ")))
   grafi <- grafi %>% 
     e_bar(MENSUAL, 
           seriesName = "MENSUAL", 
@@ -598,24 +626,25 @@ graf_curso <- function(data,theme_show = "dark",with_total = FALSE){
                            borderRadius = 10,
                            shadowColor = "black",
                            shadowBlur = 10),
-          stack = "grp")
+          stack = "grp",
+          label = list(show = TRUE,
+                       fontWeight = "bold", 
+                       fontSize = 16,
+                       color = "#FFC502",
+                       formatter  =  htmlwidgets::JS("
+                            function(params){
+                              var value = params.value[1];
+                              var parts = value.toString().split('.');
+                              parts[0] = parts[0].replace(/\\B(?=(\\d{3})+(?!\\d))/g, ',');
+                              return parts.join('.');
+                            }
+                            ")))
   grafi <- grafi %>% 
-    e_labels(position = "inside", 
-             fontWeight = "bold", 
-             fontSize = 16,
-             formatter  =  htmlwidgets::JS("
-                 function(params){
-                   var value = params.value[1];
-                   var parts = value.toString().split('.');
-                   parts[0] = parts[0].replace(/\\B(?=(\\d{3})+(?!\\d))/g, ',');
-                   return parts.join('.');
-                 }
-                ")) |>
     # Marca el área de las barras
     e_mark_area(data = list(list(xAxis = 0),
                             list(xAxis = 1)
     ),
-    itemStyle = list(color = "#00aae495",
+    itemStyle = list(color = color_mark,
                      opacity = 0.1)
     )
   if (with_total == TRUE) {
@@ -627,7 +656,8 @@ graf_curso <- function(data,theme_show = "dark",with_total = FALSE){
              label = list(show = TRUE, 
                           position = "top", 
                           fontWeight = "bold", 
-                          fontSize = 16,
+                          border = "0",
+                          fontSize = 18,
                           formatter  =  htmlwidgets::JS("
                               function(params){
                                  var value = params.value[1];
@@ -696,7 +726,7 @@ graf_sex <- function(data,theme_show = "dark",with_total = FALSE){
     e_mark_area(data = list(list(xAxis = 0),
                             list(xAxis = 1)
     ),
-    itemStyle = list(color = "#00aae495",
+    itemStyle = list(color = color_mark,
                      opacity = 0.1)
     )
   if (with_total == TRUE) {
@@ -708,7 +738,7 @@ graf_sex <- function(data,theme_show = "dark",with_total = FALSE){
              label = list(show = TRUE, 
                           position = "top", 
                           fontWeight = "bold", 
-                          fontSize = 16,
+                          fontSize = 18,
                           formatter  =  htmlwidgets::JS("
                               function(params){
                                  var value = params.value[1];
@@ -757,6 +787,7 @@ graf_four_bars <- function(data,theme_show = "dark",with_total = FALSE){
                        position = "insideRight", 
                        fontWeight = "bold", 
                        fontSize = 16,
+                       backgroundColor = "#00CED1",
                        formatter  =  htmlwidgets::JS("
                               function(params){
                                  var value = params.value[1];
@@ -778,6 +809,7 @@ graf_four_bars <- function(data,theme_show = "dark",with_total = FALSE){
                        position = "insideLeft", 
                        fontWeight = "bold", 
                        fontSize = 16,
+                       backgroundColor = "#FF5733",
                        formatter  =  htmlwidgets::JS("
                               function(params){
                                  var value = params.value[1];
@@ -799,6 +831,7 @@ graf_four_bars <- function(data,theme_show = "dark",with_total = FALSE){
                        position = "inside", 
                        fontWeight = "bold", 
                        fontSize = 16,
+                       backgroundColor = "#073767",
                        formatter  =  htmlwidgets::JS("
                               function(params){
                                  var value = params.value[1];
@@ -820,6 +853,7 @@ graf_four_bars <- function(data,theme_show = "dark",with_total = FALSE){
                        position = "inside", 
                        fontWeight = "bold", 
                        fontSize = 16,
+                       backgroundColor = "#FFC502",
                        formatter  =  htmlwidgets::JS("
                               function(params){
                                  var value = params.value[1];
@@ -829,23 +863,12 @@ graf_four_bars <- function(data,theme_show = "dark",with_total = FALSE){
                                }
                               ")))
   
-  grafiss <- grafi %>% 
-    e_labels(position = "inside", 
-             fontWeight = "bold", 
-             fontSize = 16,
-             formatter  =  htmlwidgets::JS("
-                function(params){
-                   var value = params.value[1];
-                   var parts = value.toString().split('.');
-                   parts[0] = parts[0].replace(/\\B(?=(\\d{3})+(?!\\d))/g, ',');
-                   return parts.join('.');
-                 }
-                ")) |>
+  grafi <- grafi %>% 
     # Marca el área de las barras
     e_mark_area(data = list(list(xAxis = 0),
                             list(xAxis = 1)
     ),
-    itemStyle = list(color = "#00aae495",
+    itemStyle = list(color = color_mark,
                      opacity = 0.1)
     )
   if (with_total == TRUE) {
@@ -857,7 +880,7 @@ graf_four_bars <- function(data,theme_show = "dark",with_total = FALSE){
              label = list(show = TRUE, 
                           position = "top", 
                           fontWeight = "bold", 
-                          fontSize = 16,
+                          fontSize = 18,
                           formatter  =  htmlwidgets::JS("
                               function(params){
                                  var value = params.value[1];
