@@ -381,13 +381,13 @@ graf_cantidad_monto <- function(data,theme_show = theme_graf){
     )
   grafi <- grafi %>% 
     e_line(MONTO, 
-           itemStyle = list(width=10, color = "#FFC502"), 
+           itemStyle = list(width=10, color = "#FFC577"), 
            symbol = "diamond", 
            symbolSize = 12, 
            label = list(show = TRUE, 
                         position = "top", 
                         fontWeight = "bold", 
-                        color = "#BF8500",
+                        color = "#FFC577",
                         fontSize = 18,
                         formatter  =  htmlwidgets::JS("
                               function(params){
@@ -686,13 +686,13 @@ graf_pago <- function(data,theme_show = theme_graf, total = TRUE){
   if(total == TRUE){
     grafi <- grafi %>% 
       e_line(Monto_sim, 
-             itemStyle = list(width=20, color = "#FFC502"), 
+             itemStyle = list(width=20, color = "#FFC570"), 
              symbol = "diamond", 
              symbolSize = 12, 
              label = list(show = TRUE, 
                           position = "top", 
                           fontWeight = "bold", 
-                          color = "#BF8500",
+                          color = "#FFC570",
                           fontSize = 16,
                           formatter  =  htmlwidgets::JS("
                               function(params){

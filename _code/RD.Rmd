@@ -122,7 +122,7 @@ Beneficiarios { .hidden}
 Row {data-height=650}
 -----------------------------------------------------------------------
 
-### N° DE BENEFICIARIOS DE RENTAS Y PENSIONES VITALICIAS DEL SISTEMA DE REPARTO
+### N° DE POBLACIÓN DE RENTISTAS TITULARES Y DERECHOHABIENTES DEL SISTEMA DE REPARTO – RENTA DIGNIDAD
 
 ```{r}
 graf_img(graf_titular_derecho(cantidad$bar, with_total = TRUE, var_cant = num_variables))
@@ -164,7 +164,7 @@ Montos { .hidden}
 Row {data-height=650}
 -----------------------------------------------------------------------
 
-### MONTO DESEMBOLSADO DE RENTAS Y PENSIONES VITALICIAS DEL SISTEMA DE REPARTO (EXPRESADO EN MILLONES DE BOLIVIANOS)
+### MONTO DESEMBOLSADO DE RENTA DIGNIDAD EN EL SISTEMA DE REPARTO (EXPRESADO EN MILLONES DE BOLIVIANOS)
 
 ```{r}
 graf_img(graf_titular_derecho(monto$bar,with_total = TRUE, var_cant = num_variables))
@@ -205,7 +205,7 @@ Montobeneficiario { .hidden}
 Row {data-height=650}
 -----------------------------------------------------------------------
 
-### MONTO DESEMBOLSADO Y N° DE BENEFICIARIOS DEL SISTEMA DE REPARTO
+### MONTO DESEMBOLSADO Y N° DE BENEFICIARIOS DEL SISTEMA DE REPARTO - RENTA DIGNIDAD
 
 ```{r}
 graf_img(graf_cantidad_monto(cantMont$bar, var_cant = num_variables))
@@ -240,7 +240,7 @@ Genero { .hidden}
 Row {data-height=650}
 -----------------------------------------------------------------------
 
-### N° DE BENEFICIARIOS DEL SISTEMA DE REPARTO – SEGÚN EL GÉNERO
+### N° DE BENEFICIARIOS DE RENTA DIGNIDAD - SEGÚN EL GÉNERO
 
 ```{r}
 graf_img(graf_sexo(genero$bar, var_cant = num_variables))
