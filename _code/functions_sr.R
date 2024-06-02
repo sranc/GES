@@ -239,6 +239,7 @@ reparto <- function(cc_data,filter_clase = NULL,filter_tipo = NULL,filter_tipo_r
     filter(if (!is.null(filter_tipo)) tipo %in% filter_tipo else TRUE) %>%
     filter(if (!is.null(filter_tipo_reparto)) tipo_reparto %in% filter_tipo_reparto else TRUE)
   if(type_resp == "n_beneficiarios"){
+    view(result)
     result <- n_beneficiarios(result)
     result <- data_to_show(result,init = "Derechohabiente",fin = "TOTAL", fin_2 = "Titular")
   }
@@ -308,14 +309,13 @@ graf_titular_derecho <- function(data,theme_show = theme_graf,with_total = FALSE
   if (with_total == TRUE) {
     grafi <- grafi %>% 
       e_line(TOTAL, 
-             itemStyle = list(width=10, color = "#FFC502"), 
+             itemStyle = list(width=10, color = "#202C33"), 
              symbol = "diamond", 
              symbolSize = 12, 
              label = list(show = TRUE, 
                           position = "top", 
                           fontWeight = "bold", 
-                          color = "#BF8500",
-                          fontSize = 16,
+                          fontSize = 18,
                           formatter  =  htmlwidgets::JS("
                               function(params){
                                 var value = params.value[1];
@@ -388,7 +388,7 @@ graf_cantidad_monto <- function(data,theme_show = theme_graf){
                         position = "top", 
                         fontWeight = "bold", 
                         color = "#BF8500",
-                        fontSize = 16,
+                        fontSize = 18,
                         formatter  =  htmlwidgets::JS("
                               function(params){
                                 var value = params.value[1];
