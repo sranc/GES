@@ -388,8 +388,9 @@ process_mont <- function(cc_data,filter_data = " "){
   return(list("bar" = bar,"table" = table_data,"pie" = pie_data,"month" = get_name))
 }
 
-process_sex <- function(data,filter_tipo = NULL,filter_clase = NULL,filter_bd = NULL,filter_tipo_cc = NULL){
+process_sex <- function(cc_data,filter_tipo = NULL,filter_clase = NULL,filter_bd = NULL,filter_tipo_cc = NULL){
   result <- cc_data %>%
+    mutate(tipo = iconv(tipo, to = "ASCII//TRANSLIT")) %>% 
     filter(if (!is.null(filter_bd)) bd %in% filter_bd else TRUE) %>%
     filter(if (!is.null(filter_clase)) clase %in% filter_clase else TRUE) %>%
     filter(if (!is.null(filter_tipo)) tipo %in% filter_tipo else TRUE) %>%
@@ -401,7 +402,10 @@ process_sex <- function(data,filter_tipo = NULL,filter_clase = NULL,filter_bd = 
     data_format_convert() %>% 
     group_by(gestion,tipo_CC,mes) %>% 
     summarise(cantidad = sum(cantidad)) %>% 
-    ungroup()
+    ungroup() %>% 
+    data_format_convert(result,type = "short") %>% 
+    select(gestion, tipo_CC, ENE, FEB, MAR, ABR, MAY, JUN, JUN_REINT, JUL, AGO, SEP, OCT, NOV, AGUI, DIC) %>% 
+    data_format_convert()
   
   result <- result %>% 
     data_format_convert(type = "short", names = "tipo_CC")
@@ -410,7 +414,7 @@ process_sex <- function(data,filter_tipo = NULL,filter_clase = NULL,filter_bd = 
   return(data_to_show(result,init = "FEMENINO",fin = "MASCULINO")) 
 }
 
-process_altas <- function(data,filter_tipo = NULL,filter_clase = NULL,filter_bd = NULL,filter_tipo_cc = NULL){
+process_altas <- function(cc_data,filter_tipo = NULL,filter_clase = NULL,filter_bd = NULL,filter_tipo_cc = NULL){
   result <- cc_data %>%
     mutate(tipo = iconv(tipo, to = "ASCII//TRANSLIT")) %>% 
     filter(if (!is.null(filter_bd)) bd %in% filter_bd else TRUE) %>%
@@ -419,10 +423,11 @@ process_altas <- function(data,filter_tipo = NULL,filter_clase = NULL,filter_bd 
     filter(if (!is.null(filter_tipo_cc)) tipo_CC %in% filter_tipo_cc else TRUE) %>%
     mutate(tipo_CC = toupper(tipo_CC)) %>% 
     select(-bd,-clase,-tipo) 
-  view(result)
+  
   result <- result %>% 
     mutate(tipo_CC = gsub(" ","_",tipo_CC)) %>% 
     mutate(tipo_CC = iconv(tipo_CC, to = "ASCII//TRANSLIT"))
+  
   result <- result %>% 
     data_format_convert()
   
@@ -771,7 +776,14 @@ graf_sex <- function(data,theme_show = "dark",with_total = FALSE){
   return(grafi)
 }
 
-graf_four_bars <- function(data,theme_show = "dark",with_total = FALSE){
+graf_four_bars <- function(data,theme_show = "dark",with_total = FALSE, NVars = 0){
+  
+  if(NVars == nrow(data) || NVars == 0){
+    area_n <- 1
+  }else{
+    area_n <- 0
+  }
+  
   grafi <- data %>% 
     e_charts(mes)
   
@@ -866,7 +878,7 @@ graf_four_bars <- function(data,theme_show = "dark",with_total = FALSE){
   grafi <- grafi %>% 
     # Marca el área de las barras
     e_mark_area(data = list(list(xAxis = 0),
-                            list(xAxis = 1)
+                            list(xAxis = area_n)
     ),
     itemStyle = list(color = color_mark,
                      opacity = 0.1)

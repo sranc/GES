@@ -471,7 +471,8 @@ Row {data-height=650}
 ### ALTAS GESTORA PÚBLICA (EXPRESADO EN N° DE BENEFICIARIOS) 
 
 ```{r}
-graf_img(graf_four_bars(altas_gestora$bar,with_total = TRUE))
+n_var <- nrow(start_process_data$bar)
+graf_img(graf_four_bars(altas_gestora$bar,with_total = TRUE, NVars = n_var))
 ```
 Row {data-height=350}
 -----------------------------------------------------------------------
