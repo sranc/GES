@@ -287,7 +287,7 @@ Row {data-height=250}
 data_table(genero$table,
            source = 'UTI',
            other = paste0('Número de población del mes de ', 
-                          monto$month, ' de las gestiones', 
+                          monto$month, ' de las gestiones ', 
                           paste0(genero$gestions_names,collapse = "-")))
 ```
 
