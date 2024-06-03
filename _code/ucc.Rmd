@@ -141,7 +141,7 @@ data_table(start_process_data$table,
            source = 'UCC',
            other = paste0('Número de tramites acumulados al mes de ', 
                           start_process_data$month,' de las gestiones ',
-                          paste0(altas_gestora$gestions_names,collapse = "-")))
+                          paste0(altas_prevision$gestions_names,collapse = "-")))
 ```
 
 ###  {data-width=350}
@@ -184,7 +184,7 @@ data_table(compensation_process_data$table,
            source = 'UCC',
            other = paste0('Número de certificados acumulados al mes de ', 
                           start_process_data$month,' de las gestiones ',
-                          paste0(altas_gestora$gestions_names,collapse = "-")))
+                          paste0(altas_prevision$gestions_names,collapse = "-")))
 ```
 
 ###  {data-width=350}
@@ -229,7 +229,7 @@ data_table(compensation_AFP_process_data$table,
            source = 'UCC',
            other = paste0('Número de certificados acumulados al mes de ', 
                           start_process_data$month,' de las gestiones ',
-                          paste0(altas_gestora$gestions_names,collapse = "-")))
+                          paste0(altas_prevision$gestions_names,collapse = "-")))
 ```
 
 ###  {data-width=350}
@@ -271,7 +271,7 @@ data_table(curso_pago_process_data$table,
            source = 'UTI',
            other = paste0('N° de Beneficiarios del mes de ', 
                           start_process_data$month,' de las gestiones ',
-                          paste0(altas_gestora$gestions_names,collapse = "-")))
+                          paste0(altas_prevision$gestions_names,collapse = "-")))
 ```
 
 ###  {data-width=350}
@@ -313,7 +313,7 @@ data_table(mont_data$table,
            source = 'UTI',
            other = paste0('Monto acumulado al mes de ', 
                           start_process_data$month,' de las gestiones ',
-                          paste0(altas_gestora$gestions_names,collapse = "-")))
+                          paste0(altas_prevision$gestions_names,collapse = "-")))
 ```
 
 ###  {data-width=350}
@@ -356,7 +356,7 @@ data_table(sex_process_data$table,
            source = 'UTI',
            other = paste0('Número de población a ', 
                           start_process_data$month,' de las gestiones ',
-                          paste0(altas_gestora$gestions_names,collapse = "-")))
+                          paste0(altas_prevision$gestions_names,collapse = "-")))
 ```
 
 ###  {data-width=350}
@@ -398,7 +398,7 @@ data_table(altas_futuro$table,
            source = 'UCC',
            other = paste0('Dato  acumulado al mes de ', 
                           start_process_data$month,' de las gestiones ',
-                          paste0(altas_gestora$gestions_names,collapse = "-")))
+                          paste0(altas_prevision$gestions_names,collapse = "-")))
 ```
 
 ###  {data-width=350}
@@ -440,7 +440,7 @@ data_table(altas_prevision$table,
            source = 'UCC',
            other = paste0('Dato  acumulado al mes de ', 
                           start_process_data$month,' de las gestiones ',
-                          paste0(altas_gestora$gestions_names,collapse = "-")))
+                          paste0(altas_prevision$gestions_names,collapse = "-")))
 ```
 
 ###  {data-width=350}

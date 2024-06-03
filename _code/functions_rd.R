@@ -336,14 +336,14 @@ graf_cantidad_monto <- function(data,theme_show = theme_graf, var_cant = 0){
     )
   grafi <- grafi %>% 
     e_line(MONTO, 
-           itemStyle = list(width=10, color = "#FFC502"), 
+           itemStyle = list(width=10, color = "#FFA500"), 
            symbol = "diamond", 
            symbolSize = 12, 
            label = list(show = TRUE, 
                         position = "top", 
                         fontWeight = "bold", 
                         fontSize = 18,
-                        color = "#FFC502",
+                        color = "#FFA500",
                         formatter  =  htmlwidgets::JS("
                               function(params){
                                 var value = params.value[1];
