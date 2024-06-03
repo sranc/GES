@@ -704,7 +704,8 @@ graf_pago <- function(data,theme_show = theme_graf, total = TRUE){
                               ) }
                               ")),
              lineStyle = list(width = 3),
-             y_index = 1)
+             y_index = 1,
+             name = "MONTO")
   }
   
   
