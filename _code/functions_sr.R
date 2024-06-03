@@ -239,7 +239,6 @@ reparto <- function(cc_data,filter_clase = NULL,filter_tipo = NULL,filter_tipo_r
     filter(if (!is.null(filter_tipo)) tipo %in% filter_tipo else TRUE) %>%
     filter(if (!is.null(filter_tipo_reparto)) tipo_reparto %in% filter_tipo_reparto else TRUE)
   if(type_resp == "n_beneficiarios"){
-    view(result)
     result <- n_beneficiarios(result)
     result <- data_to_show(result,init = "Derechohabiente",fin = "TOTAL", fin_2 = "Titular")
   }
