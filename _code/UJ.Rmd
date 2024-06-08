@@ -107,7 +107,7 @@ graf_img <- function(graf){
 
 ### 
 
-<img src="../_data/Reparto.png" alt="Sistema Reparto" style="max-width: 100%;"/>
+<img src="../_data/UJ.png" alt="Sistema Reparto" style="max-width: 100%;"/>
 
 # Cobros {#cobros .hidden}
 
