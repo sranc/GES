@@ -21,7 +21,7 @@
 
 .navbar-brand {
   pointer-events: none;
-    padding: 14.5px 79.5px;
+    padding: 14.5px 20.5px;
 }
 
 .navbar-inverse .navbar-brand {
@@ -72,9 +72,60 @@ h3{
   font-size: 3em;
 }
 
-/*.panel-custom-bg {
-  background-image: url('bg.jpeg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-}*/
+.chart-title {
+  background-color: #1B2D5B;
+  font-weight: bold !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  color: #D8BB48 !important;
+}
+
+.flowing-content-container {
+    padding: 0 !important;
+}
+
+.chart-stage {
+  padding: 0;
+  background-color: white;
+}
+
+/* Media query para pantallas más grandes de 21 pulgadas */
+@media screen and (min-width: 1600px) {
+  .chart-title {
+    font-size: 20px !important; /* Tamaño de letra para pantallas más grandes */
+  }
+  .chart-stage {
+    font-size: 14px !important;
+  }
+}
+
+/* Media query para pantallas de 15 pulgadas a 20 pulgadas */
+@media screen and (min-width: 1200px) and (max-width: 1599px) {
+  .chart-title {
+    font-size: 16px !important; /* Tamaño de letra para pantallas medianas */
+  }
+  .chart-stage {
+    font-size: 12px !important;
+  }
+}
+
+/* Media query para pantallas de 9 pulgadas a 14 pulgadas */
+@media screen and (min-width: 600px) and (max-width: 1199px) {
+  .chart-title {
+    font-size: 14px !important; /* Tamaño de letra para pantallas más pequeñas */
+  }
+  .chart-stage {
+    font-size: 10px !important;
+  }
+}
+
+/* Media query para pantallas menores a 9 pulgadas */
+@media screen and (max-width: 599px) {
+  .chart-title {
+    font-size: 12px !important; /* Tamaño de letra para pantallas muy pequeñas */
+  }
+  .chart-stage {
+    font-size: 8px !important;
+  }
+}
+

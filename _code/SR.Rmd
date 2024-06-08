@@ -1,5 +1,5 @@
 ---
-title: "Sistema Reparto"
+title: "SISTEMA REPARTO"
 output: 
   flexdashboard::flex_dashboard:
     orientation: rows
@@ -20,6 +20,9 @@ output:
           family: JetBrains Mono
           local: false
     css: styles.css
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 ```{r setup, include=FALSE}
@@ -85,59 +88,59 @@ graf_img <- function(graf){
     background-position: center; 
     height: 100%%; 
     width: 100%%; 
-    overflow: hidden;",
+    overflow: hidden;
+    padding: 0; 
+    margin: 0;",
     img_base64
   ),
-  p(graf)
+  p(
+    style = "padding: 0 5px; margin: 0;",
+    graf
+    )
 )
 }
 
 ```
 
-Sistema Reparto { .hidden}
-=======================================================================
+# Sistema Reparto {.hidden}
 
-{.sidebar}
------------------------------------------------------------------------
+##  {.sidebar}
 
-[Número Beneficiarios](#beneficiarios)
+<img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+[Número Beneficiarios](#beneficiarios) 
 [Monto Desembolsado](#montos)
-[Monto vs Beneficiario](#montobeneficiario)
-[N° Beneficiario segun Género](#genero)
+[Monto vs Beneficiario](#montobeneficiario) 
+[N° Beneficiario segun Género](#genero) 
 [N° Beneficiario por Departamento](#departamento)
-[Planilla de Pago Regular](#regular)
-[Planillas de Pago a Domicilio](#domicilio)
-[Planillas Abono a Cuenta](#abono)
+[Planilla de Pago Regular](#regular) 
+[Planillas de Pago a Domicilio](#domicilio) 
+[Planillas Abono a Cuenta](#abono) 
 [Planillas Pago con Poder](#poder)
-[Formulario de Autorización de Pago (ANEXO 15) ](#autorizacion)
+[Formulario de Autorización de Pago (ANEXO 15)](#autorizacion)
 
-Row
------------------------------------------------------------------------
+## Row
 
 ### 
 
-<img src="../_data/Reparto.png" alt="Sistema Reparto" style="max-width: 100%;">
+<img src="../_data/Reparto.png" alt="Sistema Reparto" style="max-width: 100%;"/>
 
-Beneficiarios { .hidden}
-=======================================================================
+# Beneficiarios {#beneficiarios .hidden}
 
+##  {.sidebar}
 
- {.sidebar}
------------------------------------------------------------------------
-
-[Número Beneficiarios](#beneficiarios)
+<img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+[Número Beneficiarios](#beneficiarios) 
 [Monto Desembolsado](#montos)
-[Monto vs Beneficiario](#montobeneficiario)
-[N° Beneficiario segun Género](#genero)
+[Monto vs Beneficiario](#montobeneficiario) 
+[N° Beneficiario segun Género](#genero) 
 [N° Beneficiario por Departamento](#departamento)
-[Planilla de Pago Regular](#regular)
-[Planillas de Pago a Domicilio](#domicilio)
-[Planillas Abono a Cuenta](#abono)
+[Planilla de Pago Regular](#regular) 
+[Planillas de Pago a Domicilio](#domicilio) 
+[Planillas Abono a Cuenta](#abono) 
 [Planillas Pago con Poder](#poder)
-[Formulario de Autorización de Pago (ANEXO 15) ](#autorizacion)
+[Formulario de Autorización de Pago (ANEXO 15)](#autorizacion)
 
-Row {data-height=650}
------------------------------------------------------------------------
+## Row {data-height="650" .custom-row}
 
 ### N° DE BENEFICIARIOS DE RENTAS Y PENSIONES VITALICIAS DEL SISTEMA DE REPARTO
 
@@ -145,10 +148,9 @@ Row {data-height=650}
 graf_img(graf_titular_derecho(cantidad$bar, with_total = TRUE))
 ```
 
-Row {data-height=250}
------------------------------------------------------------------------
+## Row {data-height="250"}
 
-### {data-width=650}
+###  {data-width="650"}
 
 ```{r}
 data_table(cantidad$table,
@@ -158,33 +160,30 @@ data_table(cantidad$table,
                           paste0(cantidad$gestions_names,collapse = "-")))
 ```
 
-###  {data-width=350}
+###  {data-width="350"}
 
 ```{r}
 #grafico_pie(cantidad$pie, name_pie = cantidad$month)
 grafico_pie(genero$pie, name_pie = monto$month)
 ```
 
-Montos { .hidden}
-=======================================================================
+# Montos {#montos .hidden}
 
+##  {.sidebar}
 
- {.sidebar}
------------------------------------------------------------------------
-
-[Número Beneficiarios](#beneficiarios)
+<img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+[Número Beneficiarios](#beneficiarios) 
 [Monto Desembolsado](#montos)
-[Monto vs Beneficiario](#montobeneficiario)
-[N° Beneficiario segun Género](#genero)
+[Monto vs Beneficiario](#montobeneficiario) 
+[N° Beneficiario segun Género](#genero) 
 [N° Beneficiario por Departamento](#departamento)
-[Planilla de Pago Regular](#regular)
-[Planillas de Pago a Domicilio](#domicilio)
-[Planillas Abono a Cuenta](#abono)
+[Planilla de Pago Regular](#regular) 
+[Planillas de Pago a Domicilio](#domicilio) 
+[Planillas Abono a Cuenta](#abono) 
 [Planillas Pago con Poder](#poder)
-[Formulario de Autorización de Pago (ANEXO 15) ](#autorizacion)
+[Formulario de Autorización de Pago (ANEXO 15)](#autorizacion)
 
-Row {data-height=650}
------------------------------------------------------------------------
+## Row {data-height="650"}
 
 ### MONTO DESEMBOLSADO DE RENTAS Y PENSIONES VITALICIAS DEL SISTEMA DE REPARTO (EXPRESADO EN MILLONES DE BOLIVIANOS)
 
@@ -192,10 +191,9 @@ Row {data-height=650}
 graf_img(graf_titular_derecho(monto$bar,with_total = TRUE))
 ```
 
-Row {data-height=250}
------------------------------------------------------------------------
+## Row {data-height="250"}
 
-### {data-width=650}
+###  {data-width="650"}
 
 ```{r}
 data_table(monto$table,
@@ -205,32 +203,29 @@ data_table(monto$table,
                           paste0(monto$gestions_names,collapse = "-")))
 ```
 
-###  {data-width=350}
+###  {data-width="350"}
 
 ```{r}
 grafico_pie(monto$pie, name_pie = monto$month)
 ```
 
-Montobeneficiario { .hidden}
-=======================================================================
+# Montobeneficiario {#montobeneficiario .hidden}
 
+##  {.sidebar}
 
- {.sidebar}
------------------------------------------------------------------------
-
-[Número Beneficiarios](#beneficiarios)
+<img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+[Número Beneficiarios](#beneficiarios) 
 [Monto Desembolsado](#montos)
-[Monto vs Beneficiario](#montobeneficiario)
-[N° Beneficiario segun Género](#genero)
+[Monto vs Beneficiario](#montobeneficiario) 
+[N° Beneficiario segun Género](#genero) 
 [N° Beneficiario por Departamento](#departamento)
-[Planilla de Pago Regular](#regular)
-[Planillas de Pago a Domicilio](#domicilio)
-[Planillas Abono a Cuenta](#abono)
+[Planilla de Pago Regular](#regular) 
+[Planillas de Pago a Domicilio](#domicilio) 
+[Planillas Abono a Cuenta](#abono) 
 [Planillas Pago con Poder](#poder)
-[Formulario de Autorización de Pago (ANEXO 15) ](#autorizacion)
+[Formulario de Autorización de Pago (ANEXO 15)](#autorizacion)
 
-Row {data-height=650}
------------------------------------------------------------------------
+## Row {data-height="650"}
 
 ### MONTO DESEMBOLSADO Y N° DE BENEFICIARIOS DEL SISTEMA DE REPARTO
 
@@ -238,8 +233,7 @@ Row {data-height=650}
 graf_img(graf_cantidad_monto(cantMont$bar))
 ```
 
-Row {data-height=250}
------------------------------------------------------------------------
+## Row {data-height="250"}
 
 ### 
 
@@ -251,37 +245,33 @@ data_table(cantMont$table,
                           paste0(monto$gestions_names,collapse = "-")))
 ```
 
-Genero { .hidden}
-=======================================================================
+# Genero {#genero .hidden}
 
+##  {.sidebar}
 
- {.sidebar}
------------------------------------------------------------------------
-
-[Número Beneficiarios](#beneficiarios)
+<img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+[Número Beneficiarios](#beneficiarios) 
 [Monto Desembolsado](#montos)
-[Monto vs Beneficiario](#montobeneficiario)
-[N° Beneficiario segun Género](#genero)
+[Monto vs Beneficiario](#montobeneficiario) 
+[N° Beneficiario segun Género](#genero) 
 [N° Beneficiario por Departamento](#departamento)
-[Planilla de Pago Regular](#regular)
-[Planillas de Pago a Domicilio](#domicilio)
-[Planillas Abono a Cuenta](#abono)
+[Planilla de Pago Regular](#regular) 
+[Planillas de Pago a Domicilio](#domicilio) 
+[Planillas Abono a Cuenta](#abono) 
 [Planillas Pago con Poder](#poder)
-[Formulario de Autorización de Pago (ANEXO 15) ](#autorizacion)
+[Formulario de Autorización de Pago (ANEXO 15)](#autorizacion)
 
-Row {data-height=650}
------------------------------------------------------------------------
+## Row {data-height="650"}
 
-### N° DE BENEFICIARIOS DEL SISTEMA DE REPARTO – SEGÚN EL GÉNERO
+### N° DE BENEFICIARIOS DEL SISTEMA DE REPARTO -- SEGÚN EL GÉNERO
 
 ```{r}
 graf_img(graf_sexo(genero$bar))
 ```
 
-Row {data-height=250}
------------------------------------------------------------------------
+## Row {data-height="250"}
 
-### {data-width=650}
+###  {data-width="650"}
 
 ```{r}
 data_table(genero$table,
@@ -291,83 +281,75 @@ data_table(genero$table,
                           paste0(genero$gestions_names,collapse = "-")))
 ```
 
-###  {data-width=350}
+###  {data-width="350"}
 
 ```{r}
 grafico_pie(genero$pie, name_pie = monto$month)
 ```
 
-Departamento { .hidden}
-=======================================================================
+# Departamento {#departamento .hidden}
 
+##  {.sidebar}
 
- {.sidebar}
------------------------------------------------------------------------
-
-[Número Beneficiarios](#beneficiarios)
+<img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+[Número Beneficiarios](#beneficiarios) 
 [Monto Desembolsado](#montos)
-[Monto vs Beneficiario](#montobeneficiario)
-[N° Beneficiario segun Género](#genero)
+[Monto vs Beneficiario](#montobeneficiario) 
+[N° Beneficiario segun Género](#genero) 
 [N° Beneficiario por Departamento](#departamento)
-[Planilla de Pago Regular](#regular)
-[Planillas de Pago a Domicilio](#domicilio)
-[Planillas Abono a Cuenta](#abono)
+[Planilla de Pago Regular](#regular) 
+[Planillas de Pago a Domicilio](#domicilio) 
+[Planillas Abono a Cuenta](#abono) 
 [Planillas Pago con Poder](#poder)
-[Formulario de Autorización de Pago (ANEXO 15) ](#autorizacion)
+[Formulario de Autorización de Pago (ANEXO 15)](#autorizacion)
 
-Row {data-height=650}
------------------------------------------------------------------------
+## Row {data-height="650"}
 
-### N° DE BENEFICIARIOS POR DEPARTAMENTO (MES DE `r toupper(monto$month) `)
+### N° DE BENEFICIARIOS POR DEPARTAMENTO (MES DE `r toupper(monto$month)`)
 
 ```{r}
 graf_img(graf_departamento(departamento$bar))
 ```
 
-Row {data-height=250}
------------------------------------------------------------------------
+## Row {data-height="250"}
 
-### {data-width=650}
+###  {data-width="650"}
 
 ```{r}
 data_table_simple(departamento$table,source = "UTI")
 ```
 
-###  {data-width=350}
+###  {data-width="350"}
 
 ```{r}
 grafico_pie_dep(departamento$bar, name_pie = monto$month)
 ```
 
-Regular { .hidden}
-=======================================================================
+# Regular {#regular .hidden}
 
+##  {.sidebar}
 
- {.sidebar}
------------------------------------------------------------------------
-
-[Número Beneficiarios](#beneficiarios)
+<img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+[Número Beneficiarios](#beneficiarios) 
 [Monto Desembolsado](#montos)
-[Monto vs Beneficiario](#montobeneficiario)
-[N° Beneficiario segun Género](#genero)
+[Monto vs Beneficiario](#montobeneficiario) 
+[N° Beneficiario segun Género](#genero) 
 [N° Beneficiario por Departamento](#departamento)
-[Planilla de Pago Regular](#regular)
-[Planillas de Pago a Domicilio](#domicilio)
-[Planillas Abono a Cuenta](#abono)
+[Planilla de Pago Regular](#regular) 
+[Planillas de Pago a Domicilio](#domicilio) 
+[Planillas Abono a Cuenta](#abono) 
 [Planillas Pago con Poder](#poder)
-[Formulario de Autorización de Pago (ANEXO 15) ](#autorizacion)
+[Formulario de Autorización de Pago (ANEXO 15)](#autorizacion)
 
-Row {data-height=650}
------------------------------------------------------------------------
+## Row {data-height="650"}
 
-### PLANILLAS DE PAGO REGULAR DEL SERVICIO NACIONAL DEL SISTEMA DE REPARTO (EXPRESADO EN MILLONES DE BOLIVIANOS) 
+### PLANILLAS DE PAGO REGULAR DEL SERVICIO NACIONAL DEL SISTEMA DE REPARTO (EXPRESADO EN MILLONES DE BOLIVIANOS)
 
 ```{r}
 graf_img(graf_pago(regular$bar))
 ```
 
-Row {data-height=250}
------------------------------------------------------------------------
+## Row {data-height="250"}
 
 ### 
 
@@ -379,35 +361,31 @@ data_table(regular$table,
                           paste0(monto$gestions_names,collapse = "-")))
 ```
 
-Domicilio { .hidden}
-=======================================================================
+# Domicilio {#domicilio .hidden}
 
+##  {.sidebar}
 
- {.sidebar}
------------------------------------------------------------------------
-
-[Número Beneficiarios](#beneficiarios)
+<img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+[Número Beneficiarios](#beneficiarios) 
 [Monto Desembolsado](#montos)
-[Monto vs Beneficiario](#montobeneficiario)
-[N° Beneficiario segun Género](#genero)
+[Monto vs Beneficiario](#montobeneficiario) 
+[N° Beneficiario segun Género](#genero) 
 [N° Beneficiario por Departamento](#departamento)
-[Planilla de Pago Regular](#regular)
-[Planillas de Pago a Domicilio](#domicilio)
-[Planillas Abono a Cuenta](#abono)
+[Planilla de Pago Regular](#regular) 
+[Planillas de Pago a Domicilio](#domicilio) 
+[Planillas Abono a Cuenta](#abono) 
 [Planillas Pago con Poder](#poder)
-[Formulario de Autorización de Pago (ANEXO 15) ](#autorizacion)
+[Formulario de Autorización de Pago (ANEXO 15)](#autorizacion)
 
-Row {data-height=650}
------------------------------------------------------------------------
+## Row {data-height="650"}
 
-### PLANILLAS DE PAGO A DOMICILIO DEL SERVICIO NACIONAL DEL SISTEMA DE REPARTO (EXPRESADO EN MILLONES DE BOLIVIANOS) 
+### PLANILLAS DE PAGO A DOMICILIO DEL SERVICIO NACIONAL DEL SISTEMA DE REPARTO (EXPRESADO EN MILLONES DE BOLIVIANOS)
 
 ```{r}
 graf_img(graf_pago(domicilio$bar))
 ```
 
-Row {data-height=250}
------------------------------------------------------------------------
+## Row {data-height="250"}
 
 ### 
 
@@ -419,35 +397,31 @@ data_table(domicilio$table,
                           paste0(monto$gestions_names,collapse = "-")))
 ```
 
-Abono { .hidden}
-=======================================================================
+# Abono {#abono .hidden}
 
+##  {.sidebar}
 
- {.sidebar}
------------------------------------------------------------------------
-
-[Número Beneficiarios](#beneficiarios)
+<img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+[Número Beneficiarios](#beneficiarios) 
 [Monto Desembolsado](#montos)
-[Monto vs Beneficiario](#montobeneficiario)
-[N° Beneficiario segun Género](#genero)
+[Monto vs Beneficiario](#montobeneficiario) 
+[N° Beneficiario segun Género](#genero) 
 [N° Beneficiario por Departamento](#departamento)
-[Planilla de Pago Regular](#regular)
-[Planillas de Pago a Domicilio](#domicilio)
-[Planillas Abono a Cuenta](#abono)
+[Planilla de Pago Regular](#regular) 
+[Planillas de Pago a Domicilio](#domicilio) 
+[Planillas Abono a Cuenta](#abono) 
 [Planillas Pago con Poder](#poder)
-[Formulario de Autorización de Pago (ANEXO 15) ](#autorizacion)
+[Formulario de Autorización de Pago (ANEXO 15)](#autorizacion)
 
-Row {data-height=650}
------------------------------------------------------------------------
+## Row {data-height="650"}
 
-### PLANILLAS DE ABONO A CUENTA DEL SERVICIO NACIONAL DEL SISTEMA DE REPARTO (EXPRESADO EN MILLONES DE BOLIVIANOS) 
+### PLANILLAS DE ABONO A CUENTA DEL SERVICIO NACIONAL DEL SISTEMA DE REPARTO (EXPRESADO EN MILLONES DE BOLIVIANOS)
 
 ```{r}
 graf_img(graf_pago(abono$bar))
 ```
 
-Row {data-height=250}
------------------------------------------------------------------------
+## Row {data-height="250"}
 
 ### 
 
@@ -459,26 +433,23 @@ data_table(abono$table,
                           paste0(monto$gestions_names,collapse = "-")))
 ```
 
-Poder { .hidden}
-=======================================================================
+# Poder {#poder .hidden}
 
+##  {.sidebar}
 
- {.sidebar}
------------------------------------------------------------------------
-
-[Número Beneficiarios](#beneficiarios)
+<img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+[Número Beneficiarios](#beneficiarios) 
 [Monto Desembolsado](#montos)
-[Monto vs Beneficiario](#montobeneficiario)
-[N° Beneficiario segun Género](#genero)
+[Monto vs Beneficiario](#montobeneficiario) 
+[N° Beneficiario segun Género](#genero) 
 [N° Beneficiario por Departamento](#departamento)
-[Planilla de Pago Regular](#regular)
-[Planillas de Pago a Domicilio](#domicilio)
-[Planillas Abono a Cuenta](#abono)
+[Planilla de Pago Regular](#regular) 
+[Planillas de Pago a Domicilio](#domicilio) 
+[Planillas Abono a Cuenta](#abono) 
 [Planillas Pago con Poder](#poder)
-[Formulario de Autorización de Pago (ANEXO 15) ](#autorizacion)
+[Formulario de Autorización de Pago (ANEXO 15)](#autorizacion)
 
-Row {data-height=650}
------------------------------------------------------------------------
+## Row {data-height="650"}
 
 ### PLANILLAS DE PAGO CON PODER DEL SERVICIO NACIONAL DEL SISTEMA DE REPARTO (EXPRESADO EN MILLONES DE BOLIVIANOS)
 
@@ -486,8 +457,7 @@ Row {data-height=650}
 graf_img(graf_pago(poder$bar))
 ```
 
-Row {data-height=250}
------------------------------------------------------------------------
+## Row {data-height="250"}
 
 ### 
 
@@ -499,26 +469,23 @@ data_table(poder$table,
                           paste0(monto$gestions_names,collapse = "-")))
 ```
 
-Autorizacion { .hidden}
-=======================================================================
+# Autorizacion {#autorizacion .hidden}
 
+##  {.sidebar}
 
- {.sidebar}
------------------------------------------------------------------------
-
-[Número Beneficiarios](#beneficiarios)
+<img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+[Número Beneficiarios](#beneficiarios) 
 [Monto Desembolsado](#montos)
-[Monto vs Beneficiario](#montobeneficiario)
-[N° Beneficiario segun Género](#genero)
+[Monto vs Beneficiario](#montobeneficiario) 
+[N° Beneficiario segun Género](#genero) 
 [N° Beneficiario por Departamento](#departamento)
-[Planilla de Pago Regular](#regular)
-[Planillas de Pago a Domicilio](#domicilio)
-[Planillas Abono a Cuenta](#abono)
+[Planilla de Pago Regular](#regular) 
+[Planillas de Pago a Domicilio](#domicilio) 
+[Planillas Abono a Cuenta](#abono) 
 [Planillas Pago con Poder](#poder)
-[Formulario de Autorización de Pago (ANEXO 15) ](#autorizacion)
+[Formulario de Autorización de Pago (ANEXO 15)](#autorizacion)
 
-Row {data-height=650}
------------------------------------------------------------------------
+## Row {data-height="650"}
 
 ### FORMULARIO ÚNICO DE AUTORIZACIÓN DE PAGO (ANEXO 15) DEL SERVICIO NACIONAL DEL SISTEMA DE REPARTO (EXPRESADO EN N° DE BENEFICIARIOS )
 
@@ -526,8 +493,7 @@ Row {data-height=650}
 graf_img(graf_pago(anexo$bar,total = FALSE))
 ```
 
-Row {data-height=250}
------------------------------------------------------------------------
+## Row {data-height="250"}
 
 ### 
 

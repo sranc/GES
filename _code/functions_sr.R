@@ -1,7 +1,7 @@
 dir <- "../_data/sr/data"
-theme_graf <- "halloween"
-color_mark <-  "#001233"
-color_text <- "#FFFFFF"
+color_mark <-  "#909090"
+color_line <-  c("#404040","#FFA500")
+color_bar <- c('#FFA500','#073767','#00CED1','#FF5733',"#3398DB")
 #############################################      funciones privadas     #############################################
 
 data_format_convert <- function(data_to_convert, type = "large",col_ini = "ENE", col_fin = "DIC", names = "mes",values = "cantidad"){
@@ -55,6 +55,9 @@ mes_selector <- function(mes){
 data_to_show <- function(data,init,fin,fin_2 = NULL){
   mes = toString(tail(data,1)$mes)
   bar <- get_data_graf(data,TRUE, MES = mes)
+  view(data)
+  view(bar)
+  view(fin)
   table_data <- data_format_convert(bar,col_ini = init,col_fin = fin,names = "TIPO",values = "CANTIDAD" )
   table_data <- table_data %>% 
     select(TIPO,MES=mes,CANTIDAD) %>% 
@@ -273,18 +276,18 @@ graf_titular_derecho <- function(data,theme_show = theme_graf,with_total = FALSE
   grafi <- grafi %>% 
     e_bar(Derechohabiente,
           seriesName = "Derechohabiente",
-          itemStyle = list( color = "#FFC502",
-                            borderRadius = 15,
+          itemStyle = list( color = color_bar[1],
+                            borderRadius = 10,
                             shadowColor = "black",
-                            shadowBlur = 20),
+                            shadowBlur = 5),
           stack = "grp")
   grafi <- grafi %>% 
     e_bar(Titular, 
           seriesName = "Titular", 
-          itemStyle = list(color = "#073767",
+          itemStyle = list(color = color_bar[2],
                            borderRadius = 10,
                            shadowColor = "black",
-                           shadowBlur = 10),
+                           shadowBlur = 5),
           stack = "grp")
   grafi <- grafi %>% 
     e_labels(position = "inside", 
@@ -308,13 +311,14 @@ graf_titular_derecho <- function(data,theme_show = theme_graf,with_total = FALSE
   if (with_total == TRUE) {
     grafi <- grafi %>% 
       e_line(TOTAL, 
-             itemStyle = list(width=10, color = "#202C33"), 
+             itemStyle = list(width=10, color = color_line[1]), 
              symbol = "diamond", 
              symbolSize = 12, 
              label = list(show = TRUE, 
                           position = "top", 
                           fontWeight = "bold", 
                           fontSize = 18,
+                          color = color_line[1],
                           formatter  =  htmlwidgets::JS("
                               function(params){
                                 var value = params.value[1];
@@ -335,7 +339,7 @@ graf_titular_derecho <- function(data,theme_show = theme_graf,with_total = FALSE
       padding = c(20,20),
       handleSize = 1,
       textStyle = list(fontSize = 10),
-      fillerColor = "#3398DB"
+      fillerColor = color_bar[5]
     ) %>%
     # Agrega tooltips
     e_tooltip(trigger = "axis") %>%
@@ -354,10 +358,10 @@ graf_cantidad_monto <- function(data,theme_show = theme_graf){
   grafi <- grafi %>% 
     e_bar(CANTIDAD, 
           seriesName = "Titular", 
-          itemStyle = list(color = "#073767",
+          itemStyle = list(color = color_bar[2],
                            borderRadius = 10,
                            shadowColor = "black",
-                           shadowBlur = 10),
+                           shadowBlur = 5),
           stack = "grp")
   grafi <- grafi %>% 
     e_labels(position = "inside", 
@@ -380,13 +384,13 @@ graf_cantidad_monto <- function(data,theme_show = theme_graf){
     )
   grafi <- grafi %>% 
     e_line(MONTO, 
-           itemStyle = list(width=10, color = "#FFC570"), 
+           itemStyle = list(width=10, color = color_line[2]), 
            symbol = "diamond", 
            symbolSize = 12, 
            label = list(show = TRUE, 
                         position = "top", 
                         fontWeight = "bold", 
-                        color = "#FFC570",
+                        color = color_line[2],
                         fontSize = 18,
                         formatter  =  htmlwidgets::JS("
                               function(params){
@@ -408,7 +412,7 @@ graf_cantidad_monto <- function(data,theme_show = theme_graf){
       padding = c(20,20),
       handleSize = 1,
       textStyle = list(fontSize = 10),
-      fillerColor = "#3398DB"
+      fillerColor = color_bar[5]
     ) %>%
     # Agrega tooltips
     e_tooltip() %>%
@@ -427,18 +431,18 @@ graf_sexo <- function(data,theme_show = theme_graf){
   grafi <- grafi %>% 
     e_bar(Femenino,
           seriesName = "Derechohabiente",
-          itemStyle = list( color = "#FFC502",
-                            borderRadius = 15,
+          itemStyle = list( color = color_bar[1],
+                            borderRadius = 10,
                             shadowColor = "black",
-                            shadowBlur = 20),
+                            shadowBlur = 5),
           stack = "grp")
   grafi <- grafi %>% 
     e_bar(Masculino, 
           seriesName = "Titular", 
-          itemStyle = list(color = "#073767",
+          itemStyle = list(color = color_bar[2],
                            borderRadius = 10,
                            shadowColor = "black",
-                           shadowBlur = 10),
+                           shadowBlur = 5),
           stack = "grp")
   
   if (nrow(data) > 7) {
@@ -486,7 +490,7 @@ graf_sexo <- function(data,theme_show = theme_graf){
       padding = c(20,20),
       handleSize = 1,
       textStyle = list(fontSize = 10),
-      fillerColor = "#3398DB"
+      fillerColor = color_bar[5]
     ) %>%
     # Agrega tooltips
     e_tooltip() %>%
@@ -505,10 +509,10 @@ graf_departamento<- function(data,theme_show = theme_graf){
   grafi <- grafi %>% 
     e_bar(cantidad, 
           seriesName = "Titular", 
-          itemStyle = list(color = "#073767",
+          itemStyle = list(color = color_bar[2],
                            borderRadius = 10,
                            shadowColor = "black",
-                           shadowBlur = 10),
+                           shadowBlur = 5),
           stack = "grp",
           name = "N° Beneficiarios")
   grafi <- grafi %>% 
@@ -533,7 +537,7 @@ graf_departamento<- function(data,theme_show = theme_graf){
       padding = c(20,20),
       handleSize = 1,
       textStyle = list(fontSize = 10),
-      fillerColor = "#3398DB"
+      fillerColor = color_bar[5]
     ) %>%
     # Agrega tooltips
     e_tooltip() %>%
@@ -580,7 +584,7 @@ grafico_pie <- function(data, theme_show = theme_graf, position_type = "inside",
             position = position_type,
             fontStyle = "oblique",
             fontWeight = "bold"),
-          color = c('#FFC502','#073767','#00CED1','#FF5733')) %>%
+          color = color_bar) %>%
     e_tooltip() %>%
     e_legend(orient = "vertical", 
              show = FALSE,
@@ -656,7 +660,7 @@ graf_pago <- function(data,theme_show = theme_graf, total = TRUE){
   grafi <- grafi %>% 
     e_bar(Cantidad, 
           seriesName = "Cantidad",
-          itemStyle = list(color = "#073767",
+          itemStyle = list(color = color_bar[2],
                            borderRadius = 10,
                            shadowColor = "black",
                            shadowBlur = 10),
@@ -685,13 +689,13 @@ graf_pago <- function(data,theme_show = theme_graf, total = TRUE){
   if(total == TRUE){
     grafi <- grafi %>% 
       e_line(Monto_sim, 
-             itemStyle = list(width=20, color = "#FFC570"), 
+             itemStyle = list(width=20, color = color_line[2]), 
              symbol = "diamond", 
              symbolSize = 12, 
              label = list(show = TRUE, 
                           position = "top", 
                           fontWeight = "bold", 
-                          color = "#FFC570",
+                          color = color_line[2],
                           fontSize = 16,
                           formatter  =  htmlwidgets::JS("
                               function(params){
@@ -717,7 +721,7 @@ graf_pago <- function(data,theme_show = theme_graf, total = TRUE){
       padding = c(20,20),
       handleSize = 1,
       textStyle = list(fontSize = 10),
-      fillerColor = "#3398DB"
+      fillerColor = color_bar[5]
     ) %>%
     # Agrega tooltips
     e_tooltip() %>%
