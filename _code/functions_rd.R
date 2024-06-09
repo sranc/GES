@@ -24,11 +24,11 @@ get_data_graf <- function(data,ges_pass = FALSE, MES = "DIC"){
   if(ges_pass == TRUE){
     dic_lastgestion_1 <- data %>% 
       filter(gestion == max(gestion) - 1 & mes == MES) %>% 
-      mutate(mes = paste(paste("(*)",mes), gestion, sep = "_"))
+      mutate(mes = paste0(mes, " ",gestion, " (*)"))
     
     dic_lastgestion_2 <- data %>% 
       filter(gestion == max(gestion) - 2 & mes == MES) %>% 
-      mutate(mes = paste(paste("(*)",mes), gestion, sep = "_"))
+      mutate(mes = paste0(mes, " ",gestion, " (*)"))
     
     new_data <- rbind(dic_lastgestion_2,dic_lastgestion_1,new_data)
   }
@@ -56,6 +56,12 @@ mes_selector <- function(mes){
 data_to_show <- function(data,init,fin,fin_2 = NULL){
   mes = toString(tail(data,1)$mes)
   bar <- get_data_graf(data,TRUE, MES = mes)
+  
+  last_month <- tail(bar$mes,1)
+  
+  bar <- bar %>% 
+    mutate(mes = ifelse(mes == last_month, paste0(last_month," (*)"), mes))
+  
   table_data <- data_format_convert(bar,col_ini = init,col_fin = fin,names = "TIPO",values = "CANTIDAD" )
   table_data <- table_data %>% 
     select(TIPO,MES=mes,CANTIDAD) %>% 
@@ -71,16 +77,15 @@ data_to_show <- function(data,init,fin,fin_2 = NULL){
   pie_data <- data_format_convert(pie_data,col_ini = init,col_fin = fin,names = "TIPO")
   pie_data <- data_format_convert(pie_data,type = "short")
   
-  get_name <- mes_selector(tail(pie_data$MES,1))
-  
   gestion_before_names <- bar %>% 
-    filter(gestion != max(gestion)) %>% 
-    select(gestion)
+    select(gestion) %>% 
+    group_by(gestion) %>% 
+    ungroup()
   
   gestion_before_names <- unique(unlist(gestion_before_names$gestion))
   gestion_before_names <- as.array(gestion_before_names)
   
-  return(list("bar" = bar,"table" = table_data,"pie" = pie_data,"month" = get_name, "gestions_names" = gestion_before_names))
+  return(list("bar" = bar,"table" = table_data,"pie" = pie_data,"month" = mes_selector(last_month), "gestions_names" = gestion_before_names))
 }
 
 n_beneficiarios <- function(result) {

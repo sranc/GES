@@ -51,11 +51,11 @@ get_data_graf <- function(data,ges_pass = FALSE, MES = "DIC"){
   if(ges_pass == TRUE){
     dic_lastgestion_1 <- data %>% 
       filter(gestion == max(gestion) - 1 & mes == MES) %>% 
-      mutate(mes = paste(paste("(*)",mes), gestion, sep = "_"))
+      mutate(mes = paste0(mes, " ",gestion, " (*)"))
    # view(dic_lastgestion_1)
     dic_lastgestion_2 <- data %>% 
       filter(gestion == max(gestion) - 2 & mes == MES) %>% 
-      mutate(mes = paste(paste("(*)",mes), gestion, sep = "_"))
+      mutate(mes = paste0(mes, " ",gestion, " (*)"))
    # view(dic_lastgestion_2)
     new_data <- rbind(dic_lastgestion_2,dic_lastgestion_1,new_data)
   }
@@ -84,6 +84,12 @@ data_to_show <- function(data,init,fin,fin_2 = NULL){
   mes = toString(tail(data,1)$mes)
   
   bar <- get_data_graf(data,TRUE,MES = mes)
+  
+  last_month <- tail(bar$mes,1)
+  
+  bar <- bar %>% 
+    mutate(mes = ifelse(mes == last_month, paste0(last_month," (*)"), mes))
+  
   table_data <- data_format_convert(bar,col_ini = init,col_fin = fin,names = "TIPO",values = "CANTIDAD" )
   table_data <- table_data %>% 
     select(TIPO,MES=mes,CANTIDAD) %>% 
@@ -98,16 +104,15 @@ data_to_show <- function(data,init,fin,fin_2 = NULL){
   pie_data <- data_format_convert(pie_data,col_ini = init,col_fin = fin,names = "TIPO")
   pie_data <- data_format_convert(pie_data,type = "short")
   
-  get_name <- mes_selector(tail(pie_data$MES,1))
-  
   gestion_before_names <- bar %>% 
-    filter(gestion != max(gestion)) %>% 
-    select(gestion)
+    select(gestion) %>% 
+    group_by(gestion) %>% 
+    ungroup()
   
   gestion_before_names <- unique(unlist(gestion_before_names$gestion))
   gestion_before_names <- as.array(gestion_before_names)
   
-  return(list("bar" = bar,"table" = table_data,"pie" = pie_data,"month" = get_name, "gestions_names" = gestion_before_names))
+  return(list("bar" = bar,"table" = table_data,"pie" = pie_data,"month" = mes_selector(last_month), "gestions_names" = gestion_before_names))
 }
 
 # Función start_process: Transformación de datos para trámites de registro de CC.
@@ -170,6 +175,11 @@ start_process <- function(cc_data){
   
   bar <- get_data_graf(resultado,TRUE,MES = mes)
   
+  last_month <- tail(bar$mes,1)
+  
+  bar <- bar %>% 
+    mutate(mes = ifelse(mes == last_month, paste0(last_month," (*)"), mes))
+  
   table_data <- data_format_convert(bar,col_ini = "OFICINA_CENTRAL",col_fin = "TOTAL",names = "TIPO",values = "CANTIDAD" )
   table_data <- table_data %>% 
     select(TIPO,MES=mes,CANTIDAD) %>% 
@@ -182,9 +192,7 @@ start_process <- function(cc_data){
   pie_data <- data_format_convert(pie_data,col_ini = "OFICINA_CENTRAL",col_fin = "REGIONALES",names = "TIPO")
   pie_data <- data_format_convert(pie_data,type = "short")
   
-  get_name <- mes_selector(tail(pie_data$MES,1))
-  
-  return(list("bar" = bar,"table" = table_data,"pie" = pie_data,"month" = get_name))
+  return(list("bar" = bar,"table" = table_data,"pie" = pie_data,"month" = mes_selector(last_month)))
 }
 
 compensation_process <- function(cc_data){
@@ -221,6 +229,11 @@ compensation_process <- function(cc_data){
   
   bar <- get_data_graf(resultado,TRUE,MES = mes)
   
+  last_month <- tail(bar$mes,1)
+  
+  bar <- bar %>% 
+    mutate(mes = ifelse(mes == last_month, paste0(last_month," (*)"), mes))
+  
   table_data <- data_format_convert(bar,col_ini = "MENSUAL",col_fin = "TOTAL",names = "TIPO",values = "CANTIDAD" )
   table_data <- table_data %>% 
     select(TIPO,MES=mes,CANTIDAD) %>% 
@@ -233,9 +246,7 @@ compensation_process <- function(cc_data){
   pie_data <- data_format_convert(pie_data,col_ini = "MENSUAL",col_fin = "GLOBAL",names = "TIPO")
   pie_data <- data_format_convert(pie_data,type = "short")
   
-  get_name <- mes_selector(tail(pie_data$MES,1))
-  
-  return(list("bar" = bar,"table" = table_data,"pie" = pie_data,"month" = get_name))
+  return(list("bar" = bar,"table" = table_data,"pie" = pie_data,"month" = mes_selector(last_month)))
 }
 
 process <- function(cc_data,data_type,filter_data = " "){
@@ -299,6 +310,11 @@ process <- function(cc_data,data_type,filter_data = " "){
   
   bar <- get_data_graf(resultado,TRUE,MES = mes)
   
+  last_month <- tail(bar$mes,1)
+  
+  bar <- bar %>% 
+    mutate(mes = ifelse(mes == last_month, paste0(last_month," (*)"), mes))
+  
   table_data <- data_format_convert(bar,col_ini = data_1,col_fin = "TOTAL",names = "TIPO",values = "CANTIDAD" )
   table_data <- table_data %>% 
     select(TIPO,MES=mes,CANTIDAD) %>% 
@@ -311,9 +327,7 @@ process <- function(cc_data,data_type,filter_data = " "){
   pie_data <- data_format_convert(pie_data,col_ini = data_1,col_fin = data_2,names = "TIPO")
   pie_data <- data_format_convert(pie_data,type = "short")
   
-  get_name <- mes_selector(tail(pie_data$MES,1))
-  
-  return(list("bar" = bar,"table" = table_data,"pie" = pie_data,"month" = get_name))
+  return(list("bar" = bar,"table" = table_data,"pie" = pie_data,"month" = mes_selector(last_month)))
 }
 
 process_n <- function(cc_data,filter_data, mes = "DIC"){
@@ -332,18 +346,25 @@ process_n <- function(cc_data,filter_data, mes = "DIC"){
   
   bar <- get_data_graf(resultado,TRUE,MES = mes) %>% 
     filter(MENSUAL > 0)
+  
+  last_month <- tail(bar$mes,1)
+  
+  bar <- bar %>% 
+    mutate(mes = ifelse(mes == last_month, paste0(last_month," (*)"), mes))
+  
   table_data <- data_format_convert(bar,col_ini = "GLOBAL",col_fin = "MENSUAL",names = "TIPO",values = "CANTIDAD" )
   table_data <- table_data %>% 
     select(TIPO,MES=mes,CANTIDAD) %>% 
     mutate(CANTIDAD = format(CANTIDAD, big.mark = ",",decimal.mark = "."))
   table_data <- data_format_convert(table_data,type = "short",names = "MES",values = "CANTIDAD")
+  
   pie_data <- tail(bar,1) %>% 
     select(mes,MENSUAL,GLOBAL) %>% 
     mutate(MES = mes, mes = "CANTIDAD")
   pie_data <- data_format_convert(pie_data,col_ini = "GLOBAL",col_fin = "MENSUAL",names = "TIPO")
   pie_data <- data_format_convert(pie_data,type = "short")
-  get_name <- mes_selector(tail(pie_data$MES,1))
-  return(list("bar" = bar,"table" = table_data,"pie" = pie_data,"month" = get_name))
+  
+  return(list("bar" = bar,"table" = table_data,"pie" = pie_data,"month" = mes_selector(last_month)))
 }
 
 process_mont <- function(cc_data,filter_data = " "){
@@ -371,6 +392,12 @@ process_mont <- function(cc_data,filter_data = " "){
     select(gestion,mes,MENSUAL,GLOBAL,TOTAL)
   mes = toString(tail(result,1)$mes)
   bar <- get_data_graf(result,TRUE,MES = mes)
+  
+  last_month <- tail(bar$mes,1)
+  
+  bar <- bar %>% 
+    mutate(mes = ifelse(mes == last_month, paste0(last_month," (*)"), mes))
+  
   table_data <- data_format_convert(bar,col_ini = data_1,col_fin = "TOTAL",names = "TIPO",values = "CANTIDAD" )
   table_data <- table_data %>% 
     select(TIPO,MES=mes,CANTIDAD) %>% 
@@ -383,9 +410,7 @@ process_mont <- function(cc_data,filter_data = " "){
   pie_data <- data_format_convert(pie_data,col_ini = data_1,col_fin = data_2,names = "TIPO")
   pie_data <- data_format_convert(pie_data,type = "short")
   
-  get_name <- mes_selector(tail(pie_data$MES,1))
-  
-  return(list("bar" = bar,"table" = table_data,"pie" = pie_data,"month" = get_name))
+  return(list("bar" = bar,"table" = table_data,"pie" = pie_data,"month" = mes_selector(last_month)))
 }
 
 process_sex <- function(cc_data,filter_tipo = NULL,filter_clase = NULL,filter_bd = NULL,filter_tipo_cc = NULL){
@@ -925,36 +950,36 @@ graf_four_bars <- function(data,theme_show = "dark",with_total = FALSE, NVars = 
   return(grafi)
 }
 
-data_table <- function(table,source,prepared = 'Area de planificación',other,title_other = '(*): '){
- n <- ncol(table)
- result <- datatable(head(table),
-            extensions = c('Select','FixedColumns'),
-            options = list(
-              dom = 't',
-              select = list(style = 'os', items = 'row'),
-              selection = 'none',
-              initComplete = JS('
+data_table <- function(table,source,prepared = 'Area de planificación',other,title_other = '(*) '){
+  n <- ncol(table)
+  result <- datatable(head(table),
+                      extensions = c('Select','FixedColumns'),
+                      options = list(
+                        dom = 't',
+                        select = list(style = 'os', items = 'row'),
+                        selection = 'none',
+                        initComplete = JS('
                function(settings, json) {
                 $("table.dataTable th").css("font-size", "10px");
                 $("table.dataTable td").css("font-size", "12px");
                }'),
-              columnDefs = list(
-                list(className = 'dt-right', targets = c(2:n-1))# Alinea todas las demás columnas a la derecha
-              )
-            ),
-            colnames = c(' ' = 'TIPO'),
-            class = 'cell-border stripe',
-            rownames = FALSE,
-            caption = htmltools::tags$caption(
-              style = 'caption-side: bottom; text-align: left;',
-              htmltools::strong('Fuente : '), htmltools::em(source),
-              htmltools::br(),
-              htmltools::strong('Elaborado: '), htmltools::em(prepared),
-              htmltools::br(),
-              htmltools::strong(title_other), htmltools::em(other)
-            )
+                        columnDefs = list(
+                          list(className = 'dt-right', targets = c(2:n-1))# Alinea todas las demás columnas a la derecha
+                        )
+                      ),
+                      colnames = c(' ' = 'TIPO'),
+                      class = 'cell-border stripe',
+                      rownames = FALSE,
+                      caption = htmltools::tags$caption(
+                        style = 'caption-side: bottom; text-align: left;',
+                        htmltools::strong('Fuente : '), htmltools::em(source),
+                        htmltools::br(),
+                        htmltools::strong('Elaborado: '), htmltools::em(prepared),
+                        htmltools::br(),
+                        htmltools::strong(title_other), htmltools::em(other)
+                      )
   )
- return(result)
+  return(result)
 }
 
 # Función para crear un gráfico circular

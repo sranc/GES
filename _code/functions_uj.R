@@ -397,7 +397,7 @@ grafico_pie <- function(data, theme_show = theme_graf, position_type = "inside",
             position = position_type,
             fontStyle = "oblique",
             fontWeight = "bold"),
-          color = color_bar) %>%
+            color = color_bar) %>%
     e_tooltip() %>%
     e_legend(orient = "vertical", 
              show = FALSE,
