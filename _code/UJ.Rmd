@@ -98,10 +98,10 @@ graf_img <- function(graf){
 ##  {.sidebar}
 
 <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
-[Número Beneficiarios](#cobros) 
-[Monto Desembolsado](#aportes)
-[Monto vs Beneficiario](#montos) 
-[N° Beneficiario segun Género](#recuperados) 
+[MONTOS RECUPERADOS POR COBROS INDEBIDOS](#cobros) 
+[MONTOS RECUPERADOS POR APORTES DEVENGADOS](#aportes)
+[MONTOS RECUPERADOS POR PROCESOS COACTIVOS SOCIALES](#montos) 
+[MONTOS RECUPERADOS POR PROCESOS PENALES](#recuperados) 
 
 ## Row
 
@@ -114,10 +114,10 @@ graf_img <- function(graf){
 ## {.sidebar}
 
 <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
-[Número Beneficiarios](#cobros) 
-[Monto Desembolsado](#aportes)
-[Monto vs Beneficiario](#montos) 
-[N° Beneficiario segun Género](#recuperados) 
+[MONTOS RECUPERADOS POR COBROS INDEBIDOS](#cobros) 
+[MONTOS RECUPERADOS POR APORTES DEVENGADOS](#aportes)
+[MONTOS RECUPERADOS POR PROCESOS COACTIVOS SOCIALES](#montos) 
+[MONTOS RECUPERADOS POR PROCESOS PENALES](#recuperados) 
 
 ## Row {data-height="650" .custom-row}
 
@@ -144,10 +144,10 @@ data_table(monto_recuperado$table,
 ##  {.sidebar}
 
 <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
-[Número Beneficiarios](#cobros) 
-[Monto Desembolsado](#aportes)
-[Monto vs Beneficiario](#montos) 
-[N° Beneficiario segun Género](#recuperados)  
+[MONTOS RECUPERADOS POR COBROS INDEBIDOS](#cobros) 
+[MONTOS RECUPERADOS POR APORTES DEVENGADOS](#aportes)
+[MONTOS RECUPERADOS POR PROCESOS COACTIVOS SOCIALES](#montos) 
+[MONTOS RECUPERADOS POR PROCESOS PENALES](#recuperados)  
 
 ## Row {data-height="650"}
 
@@ -174,10 +174,10 @@ data_table(aportes_devengados$table,
 ##  {.sidebar}
 
 <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
-[Número Beneficiarios](#cobros) 
-[Monto Desembolsado](#aportes)
-[Monto vs Beneficiario](#montos) 
-[N° Beneficiario segun Género](#recuperados)  
+[MONTOS RECUPERADOS POR COBROS INDEBIDOS](#cobros) 
+[MONTOS RECUPERADOS POR APORTES DEVENGADOS](#aportes)
+[MONTOS RECUPERADOS POR PROCESOS COACTIVOS SOCIALES](#montos) 
+[MONTOS RECUPERADOS POR PROCESOS PENALES](#recuperados)  
 
 ## Row {data-height="650"}
 
@@ -210,10 +210,10 @@ grafico_pie(recuperado_devengado$pie, name_pie = aportes_devengados$month)
 ##  {.sidebar}
 
 <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
-[Número Beneficiarios](#cobros) 
-[Monto Desembolsado](#aportes)
-[Monto vs Beneficiario](#montos) 
-[N° Beneficiario segun Género](#recuperados) 
+[MONTOS RECUPERADOS POR COBROS INDEBIDOS](#cobros) 
+[MONTOS RECUPERADOS POR APORTES DEVENGADOS](#aportes)
+[MONTOS RECUPERADOS POR PROCESOS COACTIVOS SOCIALES](#montos) 
+[MONTOS RECUPERADOS POR PROCESOS PENALES](#recuperados) 
 
 ## Row {data-height="650"}
 
