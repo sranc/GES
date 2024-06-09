@@ -164,7 +164,7 @@ start_process <- function(cc_data){
   # Calcular totales mensuales y totales generales
   total_mes <- resultado %>% 
     group_by(gestion,tipo_CC = "TOTAL") %>% 
-    summarise(across(ENE:DIC, sum))
+    summarise(across(ENE:DIC, sum), .groups = "drop")
   
   # Unir resultados 
   resultado <- bind_rows(resultado,total_mes) 
@@ -218,7 +218,7 @@ compensation_process <- function(cc_data){
   # Calcular totales mensuales y totales generales
   total_mes <- resultado %>% 
     group_by(gestion,tipo_CC = "TOTAL") %>% 
-    summarise(across(ENE:DIC, sum))
+    summarise(across(ENE:DIC, sum), .groups = "drop")
   
   # Unir resultados 
   resultado <- bind_rows(resultado,total_mes) 
@@ -299,7 +299,7 @@ process <- function(cc_data,data_type,filter_data = " "){
   # Calcular totales mensuales y totales generales
   total_mes <- resultado %>% 
     group_by(gestion,tipo_CC = "TOTAL") %>% 
-    summarise(across(ENE:DIC, sum))
+    summarise(across(ENE:DIC, sum), .groups = "drop")
   
   # Unir resultados 
   resultado <- bind_rows(resultado,total_mes) 
@@ -426,7 +426,7 @@ process_sex <- function(cc_data,filter_tipo = NULL,filter_clase = NULL,filter_bd
   result <- result %>% 
     data_format_convert() %>% 
     group_by(gestion,tipo_CC,mes) %>% 
-    summarise(cantidad = sum(cantidad)) %>% 
+    summarise(cantidad = sum(cantidad), .groups = "drop") %>% 
     ungroup() %>% 
     data_format_convert(result,type = "short") %>% 
     select(gestion, tipo_CC, ENE, FEB, MAR, ABR, MAY, JUN, JUN_REINT, JUL, AGO, SEP, OCT, NOV, AGUI, DIC) %>% 

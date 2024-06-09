@@ -90,7 +90,7 @@ data_to_show <- function(data,init,fin,fin_2 = NULL){
 n_beneficiarios <- function(result) {
   result <- result %>% 
     group_by(gestion,tipo_reparto,mes) %>% 
-    summarise(cantidad = sum(cantidad)) %>% 
+    summarise(cantidad = sum(cantidad), .groups = "drop") %>% 
     ungroup()
   result <- data_format_convert(result,type = "short") %>% 
     select(gestion, tipo_reparto, ENE, FEB, MAR, ABR, MAY, JUN, JUL, AGO, SEP, OCT, NOV, AGUI, DIC) %>% 
@@ -106,7 +106,7 @@ n_beneficiarios <- function(result) {
 m_beneficiarios <- function(result) {
   result <- result %>% 
     group_by(gestion,tipo_reparto,mes) %>% 
-    summarise(cantidad = sum(cantidad)) %>% 
+    summarise(cantidad = sum(cantidad), .groups = "drop") %>% 
     ungroup()
   result <- data_format_convert(result,type = "short") %>% 
     select(gestion, tipo_reparto, ENE, FEB, MAR, ABR, MAY, JUN, JUL, AGO, SEP, OCT, NOV, AGUI, DIC) %>% 
@@ -127,7 +127,7 @@ m_beneficiarios <- function(result) {
 sn_beneficiarios <- function(result) {
   result <- result %>% 
     group_by(gestion,tipo_reparto,mes) %>% 
-    summarise(cantidad = sum(cantidad)) %>% 
+    summarise(cantidad = sum(cantidad), .groups = "drop") %>% 
     ungroup()
   result <- data_format_convert(result,type = "short") %>% 
     select(gestion, tipo_reparto, ENE, FEB, MAR, ABR, MAY, JUN, JUL, AGO, SEP, OCT, NOV, AGUI, DIC) %>% 
@@ -143,7 +143,7 @@ dn_beneficiarios <- function(result,month) {
   result <- result %>% 
     filter(gestion == max(gestion)) %>% 
     group_by(gestion,tipo,mes) %>% 
-    summarise(cantidad = sum(cantidad)) %>% 
+    summarise(cantidad = sum(cantidad), .groups = "drop") %>% 
     ungroup()
   
   result <- data_format_convert(result,type = "short") %>% 
@@ -162,7 +162,7 @@ dn_beneficiarios <- function(result,month) {
 pagos_beneficiarios <- function(result) {
   result <- result %>% 
     group_by(bd,gestion,mes) %>% 
-    summarise(cantidad = sum(cantidad)) %>% 
+    summarise(cantidad = sum(cantidad), .groups = "drop") %>% 
     ungroup()
   result <- data_format_convert(result,type = "short") %>% 
     select(gestion, bd, ENE, FEB, MAR, ABR, MAY, JUN, JUL, AGO, SEP, OCT, NOV, AGUI, DIC) %>% 
@@ -182,7 +182,7 @@ anexo <- function(result) {
   result <- result %>% 
     select(gestion,mes,cantidad) %>% 
     group_by(gestion,mes) %>% 
-    summarise(cantidad = sum(cantidad)) %>% 
+    summarise(cantidad = sum(cantidad), .groups = "drop") %>% 
     ungroup()
   result <- data_format_convert(result,type = "short") %>% 
     select(gestion, ENE, FEB, MAR, ABR, MAY, JUN, JUL, AGO, SEP, OCT, NOV, AGUI, DIC) %>% 

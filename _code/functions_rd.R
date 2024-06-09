@@ -92,7 +92,7 @@ n_beneficiarios <- function(result) {
   view(result)
   result <- result %>% 
     group_by(gestion,tipo_renta_dignidad,mes) %>% 
-    summarise(cantidad = sum(cantidad)) %>% 
+    summarise(cantidad = sum(cantidad), .groups = "drop") %>% 
     ungroup()
  
   result <- data_format_convert(result,type = "short") %>% 
@@ -109,7 +109,7 @@ n_beneficiarios <- function(result) {
 m_beneficiarios <- function(result) {
   result <- result %>% 
     group_by(gestion,tipo_renta_dignidad,mes) %>% 
-    summarise(cantidad = sum(cantidad)) %>% 
+    summarise(cantidad = sum(cantidad), .groups = "drop") %>% 
     ungroup()
   result <- data_format_convert(result,type = "short") %>% 
     select(gestion, tipo_renta_dignidad, ENE, FEB, MAR, ABR, MAY, JUN, JUL, AGO, SEP, OCT, NOV, AGUI, DIC) %>% 
@@ -130,7 +130,7 @@ m_beneficiarios <- function(result) {
 sn_beneficiarios <- function(result) {
   result <- result %>% 
     group_by(gestion,tipo_renta_dignidad,mes) %>% 
-    summarise(cantidad = sum(cantidad)) %>% 
+    summarise(cantidad = sum(cantidad), .groups = "drop") %>% 
     ungroup()
   result <- data_format_convert(result,type = "short") %>% 
     select(gestion, tipo_renta_dignidad, ENE, FEB, MAR, ABR, MAY, JUN, JUL, AGO, SEP, OCT, NOV, AGUI, DIC) %>% 
