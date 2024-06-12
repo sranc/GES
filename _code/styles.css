@@ -19,6 +19,11 @@
   padding-left: 20px;
 }
 
+.section.sidebar a[href="#inicio"]:hover {
+  background-color: #1B2D5B !important;
+  padding-left: 10px !important;
+}
+
 .navbar-brand {
   pointer-events: none;
     padding: 14.5px 20.5px;

@@ -97,7 +97,9 @@ graf_img <- function(graf){
 
 ##  {.sidebar}
 
-<img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+<a href="#inicio">
+  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+</a>
 [COBROS INDEBIDOS](#cobros) 
 [APORTES DEVENGADOS](#aportes)
 [PROCESOS COACTIVOS SOCIALES](#montos) 
@@ -113,7 +115,9 @@ graf_img <- function(graf){
 
 ## {.sidebar}
 
-<img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+<a href="#inicio">
+  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+</a>
 [COBROS INDEBIDOS](#cobros) 
 [APORTES DEVENGADOS](#aportes)
 [PROCESOS COACTIVOS SOCIALES](#montos) 
@@ -143,7 +147,9 @@ data_table(monto_recuperado$table,
 
 ##  {.sidebar}
 
-<img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+<a href="#inicio">
+  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+</a>
 [COBROS INDEBIDOS](#cobros) 
 [APORTES DEVENGADOS](#aportes)
 [PROCESOS COACTIVOS SOCIALES](#montos) 
@@ -173,7 +179,9 @@ data_table(aportes_devengados$table,
 
 ##  {.sidebar}
 
-<img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+<a href="#inicio">
+  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+</a>
 [COBROS INDEBIDOS](#cobros) 
 [APORTES DEVENGADOS](#aportes)
 [PROCESOS COACTIVOS SOCIALES](#montos) 
@@ -209,7 +217,9 @@ grafico_pie(recuperado_devengado$pie, name_pie = aportes_devengados$month)
 
 ##  {.sidebar}
 
-<img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+<a href="#inicio">
+  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+</a>
 [COBROS INDEBIDOS](#cobros) 
 [APORTES DEVENGADOS](#aportes)
 [PROCESOS COACTIVOS SOCIALES](#montos) 

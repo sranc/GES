@@ -94,6 +94,9 @@ Sistema Reparto { .hidden}
 {.sidebar}
 -----------------------------------------------------------------------
 
+<a href="#inicio">
+  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+</a>
 [Población de Rentistas](#beneficiarios)
 [Monto Desembolsado](#montos)
 [Monto vs Beneficiario](#montobeneficiario)
@@ -113,7 +116,9 @@ Beneficiarios { .hidden}
  {.sidebar}
 -----------------------------------------------------------------------
 
-
+<a href="#inicio">
+  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+</a>
 [Población de Rentistas](#beneficiarios)
 [Monto Desembolsado](#montos)
 [Monto vs Beneficiario](#montobeneficiario)
@@ -155,7 +160,9 @@ Montos { .hidden}
  {.sidebar}
 -----------------------------------------------------------------------
 
-
+<a href="#inicio">
+  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+</a>
 [Población de Rentistas](#beneficiarios)
 [Monto Desembolsado](#montos)
 [Monto vs Beneficiario](#montobeneficiario)
@@ -196,7 +203,9 @@ Montobeneficiario { .hidden}
  {.sidebar}
 -----------------------------------------------------------------------
 
-
+<a href="#inicio">
+  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+</a>
 [Población de Rentistas](#beneficiarios)
 [Monto Desembolsado](#montos)
 [Monto vs Beneficiario](#montobeneficiario)
@@ -231,7 +240,9 @@ Genero { .hidden}
  {.sidebar}
 -----------------------------------------------------------------------
 
-
+<a href="#inicio">
+  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+</a>
 [Población de Rentistas](#beneficiarios)
 [Monto Desembolsado](#montos)
 [Monto vs Beneficiario](#montobeneficiario)

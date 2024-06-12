@@ -105,8 +105,9 @@ graf_img <- function(graf){
 # Sistema Reparto {.hidden}
 
 ##  {.sidebar}
-
-<img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+<a href="#inicio">
+  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+</a>
 [Número Beneficiarios](#beneficiarios) 
 [Monto Desembolsado](#montos)
 [Monto vs Beneficiario](#montobeneficiario) 
@@ -128,7 +129,9 @@ graf_img <- function(graf){
 
 ##  {.sidebar}
 
-<img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+<a href="#inicio">
+  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+</a>
 [Número Beneficiarios](#beneficiarios) 
 [Monto Desembolsado](#montos)
 [Monto vs Beneficiario](#montobeneficiario) 
@@ -171,7 +174,9 @@ grafico_pie(genero$pie, name_pie = monto$month)
 
 ##  {.sidebar}
 
-<img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+<a href="#inicio">
+  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+</a>
 [Número Beneficiarios](#beneficiarios) 
 [Monto Desembolsado](#montos)
 [Monto vs Beneficiario](#montobeneficiario) 
@@ -213,7 +218,9 @@ grafico_pie(monto$pie, name_pie = monto$month)
 
 ##  {.sidebar}
 
-<img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+<a href="#inicio">
+  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+</a>
 [Número Beneficiarios](#beneficiarios) 
 [Monto Desembolsado](#montos)
 [Monto vs Beneficiario](#montobeneficiario) 
@@ -249,7 +256,9 @@ data_table(cantMont$table,
 
 ##  {.sidebar}
 
-<img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+<a href="#inicio">
+  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+</a>
 [Número Beneficiarios](#beneficiarios) 
 [Monto Desembolsado](#montos)
 [Monto vs Beneficiario](#montobeneficiario) 
@@ -291,7 +300,9 @@ grafico_pie(genero$pie, name_pie = monto$month)
 
 ##  {.sidebar}
 
-<img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+<a href="#inicio">
+  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+</a>
 [Número Beneficiarios](#beneficiarios) 
 [Monto Desembolsado](#montos)
 [Monto vs Beneficiario](#montobeneficiario) 
@@ -329,7 +340,9 @@ grafico_pie_dep(departamento$bar, name_pie = monto$month)
 
 ##  {.sidebar}
 
-<img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+<a href="#inicio">
+  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+</a>
 [Número Beneficiarios](#beneficiarios) 
 [Monto Desembolsado](#montos)
 [Monto vs Beneficiario](#montobeneficiario) 
@@ -365,7 +378,9 @@ data_table(regular$table,
 
 ##  {.sidebar}
 
-<img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+<a href="#inicio">
+  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+</a>
 [Número Beneficiarios](#beneficiarios) 
 [Monto Desembolsado](#montos)
 [Monto vs Beneficiario](#montobeneficiario) 
@@ -401,7 +416,9 @@ data_table(domicilio$table,
 
 ##  {.sidebar}
 
-<img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+<a href="#inicio">
+  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+</a>
 [Número Beneficiarios](#beneficiarios) 
 [Monto Desembolsado](#montos)
 [Monto vs Beneficiario](#montobeneficiario) 
@@ -437,7 +454,9 @@ data_table(abono$table,
 
 ##  {.sidebar}
 
-<img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+<a href="#inicio">
+  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+</a>
 [Número Beneficiarios](#beneficiarios) 
 [Monto Desembolsado](#montos)
 [Monto vs Beneficiario](#montobeneficiario) 
@@ -473,7 +492,9 @@ data_table(poder$table,
 
 ##  {.sidebar}
 
-<img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+<a href="#inicio">
+  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+</a>
 [Número Beneficiarios](#beneficiarios) 
 [Monto Desembolsado](#montos)
 [Monto vs Beneficiario](#montobeneficiario) 
