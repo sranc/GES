@@ -98,7 +98,7 @@ graf_img <- function(graf){
 ##  {.sidebar}
 
 <a href="#inicio">
-  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+  <img src='images/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
 </a>
 [COBROS INDEBIDOS](#cobros) 
 [APORTES DEVENGADOS](#aportes)
@@ -109,14 +109,14 @@ graf_img <- function(graf){
 
 ### 
 
-<img src="../_data/UJ.png" alt="Sistema Reparto" style="max-width: 100%;"/>
+<img src="images/UJ.png" alt="Sistema Reparto" style="max-width: 100%;"/>
 
 # Cobros {#cobros .hidden}
 
 ## {.sidebar}
 
 <a href="#inicio">
-  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+  <img src='images/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
 </a>
 [COBROS INDEBIDOS](#cobros) 
 [APORTES DEVENGADOS](#aportes)
@@ -148,7 +148,7 @@ data_table(monto_recuperado$table,
 ##  {.sidebar}
 
 <a href="#inicio">
-  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+  <img src='images/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
 </a>
 [COBROS INDEBIDOS](#cobros) 
 [APORTES DEVENGADOS](#aportes)
@@ -180,7 +180,7 @@ data_table(aportes_devengados$table,
 ##  {.sidebar}
 
 <a href="#inicio">
-  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+  <img src='images/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
 </a>
 [COBROS INDEBIDOS](#cobros) 
 [APORTES DEVENGADOS](#aportes)
@@ -218,7 +218,7 @@ grafico_pie(recuperado_devengado$pie, name_pie = aportes_devengados$month)
 ##  {.sidebar}
 
 <a href="#inicio">
-  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+  <img src='images/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
 </a>
 [COBROS INDEBIDOS](#cobros) 
 [APORTES DEVENGADOS](#aportes)

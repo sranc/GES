@@ -106,7 +106,7 @@ graf_img <- function(graf){
 
 ##  {.sidebar}
 <a href="#inicio">
-  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+  <img src='images/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
 </a>
 [Número Beneficiarios](#beneficiarios) 
 [Monto Desembolsado](#montos)
@@ -123,14 +123,14 @@ graf_img <- function(graf){
 
 ### 
 
-<img src="../_data/Reparto.png" alt="Sistema Reparto" style="max-width: 100%;"/>
+<img src="images/Reparto.png" alt="Sistema Reparto" style="max-width: 100%;"/>
 
 # Beneficiarios {#beneficiarios .hidden}
 
 ##  {.sidebar}
 
 <a href="#inicio">
-  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+  <img src='images/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
 </a>
 [Número Beneficiarios](#beneficiarios) 
 [Monto Desembolsado](#montos)
@@ -175,7 +175,7 @@ grafico_pie(genero$pie, name_pie = monto$month)
 ##  {.sidebar}
 
 <a href="#inicio">
-  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+  <img src='images/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
 </a>
 [Número Beneficiarios](#beneficiarios) 
 [Monto Desembolsado](#montos)
@@ -219,7 +219,7 @@ grafico_pie(monto$pie, name_pie = monto$month)
 ##  {.sidebar}
 
 <a href="#inicio">
-  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+  <img src='images/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
 </a>
 [Número Beneficiarios](#beneficiarios) 
 [Monto Desembolsado](#montos)
@@ -257,7 +257,7 @@ data_table(cantMont$table,
 ##  {.sidebar}
 
 <a href="#inicio">
-  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+  <img src='images/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
 </a>
 [Número Beneficiarios](#beneficiarios) 
 [Monto Desembolsado](#montos)
@@ -301,7 +301,7 @@ grafico_pie(genero$pie, name_pie = monto$month)
 ##  {.sidebar}
 
 <a href="#inicio">
-  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+  <img src='images/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
 </a>
 [Número Beneficiarios](#beneficiarios) 
 [Monto Desembolsado](#montos)
@@ -341,7 +341,7 @@ grafico_pie_dep(departamento$bar, name_pie = monto$month)
 ##  {.sidebar}
 
 <a href="#inicio">
-  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+  <img src='images/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
 </a>
 [Número Beneficiarios](#beneficiarios) 
 [Monto Desembolsado](#montos)
@@ -379,7 +379,7 @@ data_table(regular$table,
 ##  {.sidebar}
 
 <a href="#inicio">
-  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+  <img src='images/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
 </a>
 [Número Beneficiarios](#beneficiarios) 
 [Monto Desembolsado](#montos)
@@ -417,7 +417,7 @@ data_table(domicilio$table,
 ##  {.sidebar}
 
 <a href="#inicio">
-  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+  <img src='images/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
 </a>
 [Número Beneficiarios](#beneficiarios) 
 [Monto Desembolsado](#montos)
@@ -455,7 +455,7 @@ data_table(abono$table,
 ##  {.sidebar}
 
 <a href="#inicio">
-  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+  <img src='images/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
 </a>
 [Número Beneficiarios](#beneficiarios) 
 [Monto Desembolsado](#montos)
@@ -493,7 +493,7 @@ data_table(poder$table,
 ##  {.sidebar}
 
 <a href="#inicio">
-  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+  <img src='images/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
 </a>
 [Número Beneficiarios](#beneficiarios) 
 [Monto Desembolsado](#montos)

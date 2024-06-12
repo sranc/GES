@@ -90,7 +90,7 @@ graf_img <- function(graf){
 ##  {.sidebar}
 
 <a href="#inicio">
-    <img src="../_data/logo.png" style="height: 50px; vertical-align: middle; background-color: white;">
+    <img src="images/logo.png" style="height: 50px; vertical-align: middle; background-color: white;">
 </a>
 [EMPRESAS POR TAMAÑO](#tamano) 
 [EMPRESAS POR TIPO](#tipo)
@@ -100,14 +100,14 @@ graf_img <- function(graf){
 
 ### 
 
-<img src="../_data/FCA.png" alt="Sistema Reparto" style="max-width: 100%;"/>
+<img src="images/FCA.png" alt="Sistema Reparto" style="max-width: 100%;"/>
 
 # Tamano {#tamano .hidden}
 
 ## {.sidebar}
 
 <a href="#inicio">
-    <img src="../_data/logo.png" style="height: 50px; vertical-align: middle; background-color: white;">
+    <img src="images/logo.png" style="height: 50px; vertical-align: middle; background-color: white;">
 </a>
 [EMPRESAS POR TAMAÑO](#tamano) 
 [EMPRESAS POR TIPO](#tipo)
@@ -138,7 +138,7 @@ data_table(tamano$table,
 ##  {.sidebar}
 
 <a href="#inicio">
-    <img src="../_data/logo.png" style="height: 50px; vertical-align: middle; background-color: white;">
+    <img src="images/logo.png" style="height: 50px; vertical-align: middle; background-color: white;">
 </a>
 [EMPRESAS POR TAMAÑO](#tamano) 
 [EMPRESAS POR TIPO](#tipo)
@@ -169,7 +169,7 @@ data_table(tipo$table,
 ##  {.sidebar}
 
 <a href="#inicio">
-    <img src="../_data/logo.png" style="height: 50px; vertical-align: middle; background-color: white;">
+    <img src="images/logo.png" style="height: 50px; vertical-align: middle; background-color: white;">
 </a>
 [EMPRESAS POR TAMAÑO](#tamano) 
 [EMPRESAS POR TIPO](#tipo)

@@ -95,7 +95,7 @@ Sistema Reparto { .hidden}
 -----------------------------------------------------------------------
 
 <a href="#inicio">
-  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+  <img src='images/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
 </a>
 [Población de Rentistas](#beneficiarios)
 [Monto Desembolsado](#montos)
@@ -107,7 +107,7 @@ Row
 
 ### 
 
-<img src="../_data/RD.png" alt="Sistema Reparto" style="max-width: 100%;">
+<img src="images/RD.png" alt="Sistema Reparto" style="max-width: 100%;">
 
 Beneficiarios { .hidden}
 =======================================================================
@@ -117,7 +117,7 @@ Beneficiarios { .hidden}
 -----------------------------------------------------------------------
 
 <a href="#inicio">
-  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+  <img src='images/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
 </a>
 [Población de Rentistas](#beneficiarios)
 [Monto Desembolsado](#montos)
@@ -161,7 +161,7 @@ Montos { .hidden}
 -----------------------------------------------------------------------
 
 <a href="#inicio">
-  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+  <img src='images/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
 </a>
 [Población de Rentistas](#beneficiarios)
 [Monto Desembolsado](#montos)
@@ -204,7 +204,7 @@ Montobeneficiario { .hidden}
 -----------------------------------------------------------------------
 
 <a href="#inicio">
-  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+  <img src='images/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
 </a>
 [Población de Rentistas](#beneficiarios)
 [Monto Desembolsado](#montos)
@@ -241,7 +241,7 @@ Genero { .hidden}
 -----------------------------------------------------------------------
 
 <a href="#inicio">
-  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+  <img src='images/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
 </a>
 [Población de Rentistas](#beneficiarios)
 [Monto Desembolsado](#montos)

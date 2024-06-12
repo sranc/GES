@@ -88,7 +88,7 @@ Sistema Reparto { .hidden}
 -----------------------------------------------------------------------
 
 <a href="#inicio">
-  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+  <img src='images/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
 </a>
 [Inicio de procesos](#startdata)
 [Certificado de compensación Nacional](#certificado)
@@ -105,7 +105,7 @@ Row
 
 ### 
 
-<img src="../_data/CC.png" alt="Sistema Reparto" style="max-width: 100%;">
+<img src="images/CC.png" alt="Sistema Reparto" style="max-width: 100%;">
 
 Startdata { .hidden}
 =======================================================================
@@ -115,7 +115,7 @@ Startdata { .hidden}
 -----------------------------------------------------------------------
 
 <a href="#inicio">
-  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+  <img src='images/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
 </a>
 [Inicio de procesos](#startdata)
 [Certificado de compensación Nacional](#certificado)
@@ -163,7 +163,7 @@ Certificado { .hidden}
 -----------------------------------------------------------------------
 
 <a href="#inicio">
-  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+  <img src='images/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
 </a>
 [Inicio de procesos](#startdata)
 [Certificado de compensación Nacional](#certificado)
@@ -209,7 +209,7 @@ Certificado_afp { .hidden}
 -----------------------------------------------------------------------
 
 <a href="#inicio">
-  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+  <img src='images/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
 </a>
 [Inicio de procesos](#startdata) 
 [Certificado de compensación Nacional](#certificado) 
@@ -257,7 +257,7 @@ Curso_pago { .hidden}
 -----------------------------------------------------------------------
 
 <a href="#inicio">
-  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+  <img src='images/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
 </a>
 [Inicio de procesos](#startdata)
 [Certificado de compensación Nacional](#certificado)
@@ -302,7 +302,7 @@ Monto { .hidden}
 -----------------------------------------------------------------------
 
 <a href="#inicio">
-  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+  <img src='images/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
 </a>
 [Inicio de procesos](#startdata)
 [Certificado de compensación Nacional](#certificado)
@@ -348,7 +348,7 @@ Sexo { .hidden}
 -----------------------------------------------------------------------
 
 <a href="#inicio">
-  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+  <img src='images/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
 </a>
 [Inicio de procesos](#startdata)
 [Certificado de compensación Nacional](#certificado)
@@ -393,7 +393,7 @@ Alta_futuro { .hidden}
 -----------------------------------------------------------------------
 
 <a href="#inicio">
-  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+  <img src='images/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
 </a>
 [Inicio de procesos](#startdata)
 [Certificado de compensación Nacional](#certificado)
@@ -438,7 +438,7 @@ Alta_prevision { .hidden}
 -----------------------------------------------------------------------
 
 <a href="#inicio">
-  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+  <img src='images/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
 </a>
 [Inicio de procesos](#startdata)
 [Certificado de compensación Nacional](#certificado)
@@ -483,7 +483,7 @@ Alta_gestora { .hidden}
 -----------------------------------------------------------------------
 
 <a href="#inicio">
-  <img src='../_data/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+  <img src='images/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
 </a>
 [Inicio de procesos](#startdata)
 [Certificado de compensación Nacional](#certificado)
