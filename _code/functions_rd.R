@@ -1,6 +1,6 @@
 dir <- "../_data/rd/data"
 theme_graf <- "halloween"
-color_mark <-  "#001233"
+color_mark <-  "#909090"
 color_text <- "#FFFFFF"
 
 #############################################      funciones privadas     #############################################

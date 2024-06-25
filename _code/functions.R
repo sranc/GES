@@ -1,7 +1,7 @@
 # directorios de las distintas areas
 
 cc_dir <- "../_data/cc/data"
-color_mark <-  "#001233"
+color_mark <-  "#909090"
 
 # join_gestions: Función que combina datos de archivos Parquet en un solo data frame.
 # Parámetros:
