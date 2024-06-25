@@ -422,16 +422,16 @@ data_table <- function(table,source,prepared = 'Area de planificación',other,ti
                         select = list(style = 'os', items = 'row'),
                         selection = 'none',
                         initComplete = JS('
-               function(settings, json) {
-                $("table.dataTable th").css("font-size", "10px");
-                $("table.dataTable td").css("font-size", "12px");
-               }'),
+                                 function(settings, json) {
+                                  $("table.dataTable th").css("font-size", "10px");
+                                  $("table.dataTable td").css("font-size", "12px");
+                                 }'),
                         columnDefs = list(
                           list(className = 'dt-right', targets = c(2:n-1))# Alinea todas las demás columnas a la derecha
                         )
                       ),
                       colnames = c(' ' = 'TIPO'),
-                      class = 'cell-border stripe',
+                      class = 'stripe hover compact',
                       rownames = FALSE,
                       caption = htmltools::tags$caption(
                         style = 'caption-side: bottom; text-align: left;',
