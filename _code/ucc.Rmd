@@ -87,6 +87,9 @@ Sistema Reparto { .hidden}
 {.sidebar}
 -----------------------------------------------------------------------
 
+<a href="#inicio">
+  <img src='images/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+</a>
 [Inicio de procesos](#startdata)
 [Certificado de compensación Nacional](#certificado)
 [Certificado de compensación AFP y APS](#certificado_afp)
@@ -102,7 +105,7 @@ Row
 
 ### 
 
-<img src="../_data/CC.png" alt="Sistema Reparto" style="max-width: 100%;">
+<img src="images/CC.png" alt="Sistema Reparto" style="max-width: 100%;">
 
 Startdata { .hidden}
 =======================================================================
@@ -111,6 +114,9 @@ Startdata { .hidden}
  {.sidebar}
 -----------------------------------------------------------------------
 
+<a href="#inicio">
+  <img src='images/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+</a>
 [Inicio de procesos](#startdata)
 [Certificado de compensación Nacional](#certificado)
 [Certificado de compensación AFP y APS](#certificado_afp)
@@ -156,6 +162,9 @@ Certificado { .hidden}
  {.sidebar}
 -----------------------------------------------------------------------
 
+<a href="#inicio">
+  <img src='images/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+</a>
 [Inicio de procesos](#startdata)
 [Certificado de compensación Nacional](#certificado)
 [Certificado de compensación AFP y APS](#certificado_afp)
@@ -199,6 +208,9 @@ Certificado_afp { .hidden}
 {.sidebar}
 -----------------------------------------------------------------------
 
+<a href="#inicio">
+  <img src='images/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+</a>
 [Inicio de procesos](#startdata) 
 [Certificado de compensación Nacional](#certificado) 
 [Certificado de compensación AFP y APS](#certificado_afp) 
@@ -244,6 +256,9 @@ Curso_pago { .hidden}
 {.sidebar}
 -----------------------------------------------------------------------
 
+<a href="#inicio">
+  <img src='images/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+</a>
 [Inicio de procesos](#startdata)
 [Certificado de compensación Nacional](#certificado)
 [Certificado de compensación AFP y APS](#certificado_afp)
@@ -286,6 +301,9 @@ Monto { .hidden}
 {.sidebar}
 -----------------------------------------------------------------------
 
+<a href="#inicio">
+  <img src='images/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+</a>
 [Inicio de procesos](#startdata)
 [Certificado de compensación Nacional](#certificado)
 [Certificado de compensación AFP y APS](#certificado_afp)
@@ -329,6 +347,9 @@ Sexo { .hidden}
 {.sidebar}
 -----------------------------------------------------------------------
 
+<a href="#inicio">
+  <img src='images/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+</a>
 [Inicio de procesos](#startdata)
 [Certificado de compensación Nacional](#certificado)
 [Certificado de compensación AFP y APS](#certificado_afp)
@@ -371,6 +392,9 @@ Alta_futuro { .hidden}
 {.sidebar}
 -----------------------------------------------------------------------
 
+<a href="#inicio">
+  <img src='images/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+</a>
 [Inicio de procesos](#startdata)
 [Certificado de compensación Nacional](#certificado)
 [Certificado de compensación AFP y APS](#certificado_afp)
@@ -413,6 +437,9 @@ Alta_prevision { .hidden}
 {.sidebar}
 -----------------------------------------------------------------------
 
+<a href="#inicio">
+  <img src='images/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+</a>
 [Inicio de procesos](#startdata)
 [Certificado de compensación Nacional](#certificado)
 [Certificado de compensación AFP y APS](#certificado_afp)
@@ -455,6 +482,9 @@ Alta_gestora { .hidden}
 {.sidebar}
 -----------------------------------------------------------------------
 
+<a href="#inicio">
+  <img src='images/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+</a>
 [Inicio de procesos](#startdata)
 [Certificado de compensación Nacional](#certificado)
 [Certificado de compensación AFP y APS](#certificado_afp)

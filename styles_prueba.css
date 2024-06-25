@@ -1,0 +1,166 @@
+.navbar {
+        background-color: #1B2D5B;
+        color: #D8BB48;
+    }
+.navbar-inverse .navbar-nav>li>a {
+        color: #D8BB48;
+    }
+.navbar a {
+        text-align: center;
+    }
+.navbar a[href="#section"] {
+        padding: 0px 1.5px 0px 0px;
+    }
+.navbar-brand {
+        margin-left: 0px!important;
+        padding-left: 5px !important;
+        padding-top: 15px !important;
+        color: #D8BB48 !important;
+        text-align: center !important;
+        width: 80%;
+    }
+.container>.navbar-header, .container-fluid>.navbar-header, .container>.navbar-collapse, .container-fluid>.navbar-collapse {
+    margin-right: -15px;
+    margin-left: 0px;
+}
+.container-fluid {
+      padding-left: 0 ;
+    }
+.chart-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1B2D5B;
+    font-size: 12px !important;
+    text-align: center;
+    color: #D8BB48 !important;
+}
+@media (min-width: 767px) {
+    .navbar {
+        width: 200px;
+        position: fixed;
+        height: 100%;
+        top: 0;
+        left: 0;
+        overflow-x: hidden;
+        padding-top: 20px;
+        padding-left: 0 ;
+    }
+    
+    /* Style for the links in the navbar */
+    .navbar a {
+        padding: 0px 15px;
+        text-decoration: none;
+        font-size: 12px;
+        color: #fff;
+        display: block;
+        width: 200px;
+        text-align: left;
+    }
+    .navbar a[href="#section"] img {
+        width: 100%;
+    }
+    
+    .container-fluid {
+      padding-left: 0 ;
+    }
+    
+    .navbar-brand {
+        margin-left: 0px!important;
+        padding-left: 5px !important;
+        padding-top: 0 !important;
+        color: #D8BB48 !important;
+        width: 200px !important;
+        text-align: center !important;
+    }
+    
+    body {
+      margin-left: 200px !important;
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+      padding-bottom: 5px !important;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      overflow-y: hidden !important;
+    }
+}
+
+@media (min-width: 1284px) {
+    .navbar a {
+        font-size: 14px;
+    }
+    .chart-title {
+        font-size: 16px !important;
+        height: 55px;
+    }
+}
+
+@media (min-width: 1590px) {
+    .navbar {
+        width: 250px;
+    }
+    .navbar a {
+        font-size: 16px;
+        width: 250px;
+    }
+    .navbar a[href="#section"] {
+        text-align: center;
+    }
+    .navbar-brand {
+        width: 250px !important;
+    }
+    .chart-title {
+        font-size: 20px !important;
+        height: 65px;
+    }
+    body {
+      margin-left: 250PX !important;
+    }
+}
+
+@media (min-width: 1910px) {
+    .navbar {
+        width: 300px;
+    }
+    .navbar a {
+        font-size: 22px;
+        width: 300px;
+    }
+    .navbar a[href="#section"] {
+        text-align: center;
+    }
+    .navbar-brand {
+        width: 300px !important;
+    }
+    .chart-title {
+        font-size: 24px !important;
+        height: 70px;
+    }
+    body {
+      margin-left: 300PX !important;
+    }
+}
+
+/* Style for the links when hovered or active 
+.navbar a:hover, .navbar a.active {
+    background-color: #575757;
+}
+
+.navbar-fixed-top, .navbar-fixed-bottom {
+    position: fixed;
+    right: 1;
+    left: 0;
+    z-index: 1030;
+    height: 100%;
+    width: 200px;
+}
+body {
+    font-family: "Source Sans Pro", Calibri, Candara, Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.42857143;
+    color: #333333;
+    background-color: #ffffff;
+    margin-left: 200px;
+    margin-top: 0;
+    padding-top: 0;
+}*/

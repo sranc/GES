@@ -1,0 +1,373 @@
+---
+title: "SISTEMA REPARTO"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    vertical_layout: fill
+    theme : 
+      version : 3
+      base_font: 
+        google: Prompt
+      heading_font:
+        google: Sen
+      code_font:
+        google: 
+          # arguments to sass::font_google() 
+          family: JetBrains Mono
+          local: false
+    css: styles.css
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+pacman::p_load(
+  tidyverse,
+  readxl,
+  dplyr,
+  sparklyr,
+  ggplot2,
+  plotly,
+  DT,
+  scales,
+  arrow,
+  crosstalk,
+  shiny,
+  htmltools,
+  echarts4r,
+  kableExtra,
+  base64enc,
+  knitr
+)
+
+source("../functions_sr.R",local = TRUE)
+
+dir <- "../../_data/sr/data"
+
+cc_data <- join_gestions(dir)
+cantidad <- reparto(cc_data,filter_clase = "Tipo de Renta", 
+                     filter_tipo_reparto = c("Titular","Derechohabiente"),
+                     filter_bd = "Cantidad", type_resp = "n_beneficiarios")
+monto <- reparto(cc_data,filter_clase = "Tipo de Renta", 
+                     filter_tipo_reparto = c("Titular","Derechohabiente"),
+                     filter_bd = "Monto", type_resp = "m_beneficiarios")
+cantMont <- cant_mont(cantidad$bar,monto$bar)
+genero <- reparto(cc_data,filter_tipo = c("Titular","Derechohabiente"), 
+                     filter_tipo_reparto = c("Masculino","Femenino"),
+                     filter_bd = "Cantidad", type_resp = "sn_beneficiarios")
+departamento <- reparto(cc_data,filter_clase = "Departamento_Regional", 
+                     filter_bd = "Cantidad", type_resp = "dn_beneficiarios", month = cantidad$pie$MES[1])
+regular <- reparto(cc_data,filter_bd = c("Cantidad","Monto"), 
+                     filter_tipo = "Regular", type_resp = "pagos_beneficiarios")
+domicilio <- reparto(cc_data,filter_bd = c("Cantidad","Monto"), 
+                     filter_tipo = "Pago a Domicilio", type_resp = "pagos_beneficiarios")
+abono <- reparto(cc_data,filter_bd = c("Cantidad","Monto"), 
+                     filter_tipo = "Abono a Cuenta", type_resp = "pagos_beneficiarios")
+poder <- reparto(cc_data,filter_bd = c("Cantidad","Monto"), 
+                     filter_tipo = "Pago con Poder", type_resp = "pagos_beneficiarios")
+anexo <- reparto(cc_data,filter_bd = "Estadistica", 
+                     filter_tipo = c("IMPEDIMENTO","HOSPITALIZACIÓN","FALLECIMIENTO") , type_resp = "anexo")
+
+knitr::include_graphics("../images/bg.jpeg")
+img_path <- "../images/bg.jpeg"  # Ruta de tu imagen
+img_base64 <- base64enc::base64encode(img_path)
+
+graf_img <- function(graf){
+  div(
+  style = sprintf(
+    "display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    background-image: url('data:image/png;base64,%s'); 
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-position: center; 
+    height: 100%%; 
+    width: 100%%; 
+    overflow: hidden;
+    padding: 0; 
+    margin: 0;",
+    img_base64
+  ),
+  p(
+    style = "padding: 0 5px; margin: 0;",
+    graf
+    )
+)
+}
+
+menu <- c("NÚMERO BENEFICIARIOS",
+          "MONTO DESEMBOLSADO",
+          "MONTO VS BENEFICIARIO",
+          "N° BENEFICIARIO SEGUN GÉNERO",
+          "N° BENEFICIARIO POR DEPARTAMENTO",
+          "PLANILLA DE PAGO REGULAR",
+          "PLANILLAS DE PAGO A DOMICILIO",
+          "PLANILLAS ABONO A CUENTA",
+          "PLANILLAS PAGO CON PODER",
+          "FORMULARIO DE AUTORIZACIÓN DE PAGO (ANEXO 15)"
+          )
+
+titles <- c("N° DE BENEFICIARIOS DE RENTAS Y PENSIONES VITALICIAS DEL SISTEMA DE REPARTO",
+          "MONTO DESEMBOLSADO DE RENTAS Y PENSIONES VITALICIAS DEL SISTEMA DE REPARTO <br> (EXPRESADO EN MILLONES DE BOLIVIANOS)",
+          "MONTO DESEMBOLSADO Y N° DE BENEFICIARIOS DEL SISTEMA DE REPARTO",
+          "N° DE BENEFICIARIOS DEL SISTEMA DE REPARTO -- SEGÚN EL GÉNERO",
+          paste("N° DE BENEFICIARIOS POR DEPARTAMENTO (MES DE",toupper(monto$month),")"),
+          "PLANILLAS DE PAGO REGULAR DEL SERVICIO NACIONAL DEL SISTEMA DE REPARTO <br> (EXPRESADO EN MILLONES DE BOLIVIANOS)",
+          "PLANILLAS DE PAGO A DOMICILIO DEL SERVICIO NACIONAL DEL SISTEMA DE REPARTO <br> (EXPRESADO EN MILLONES DE BOLIVIANOS)",
+          "PLANILLAS DE ABONO A CUENTA DEL SERVICIO NACIONAL DEL SISTEMA DE REPARTO <br> (EXPRESADO EN MILLONES DE BOLIVIANOS)",
+          "PLANILLAS DE PAGO CON PODER DEL SERVICIO NACIONAL DEL SISTEMA DE REPARTO <br> (EXPRESADO EN MILLONES DE BOLIVIANOS)",
+          "FORMULARIO ÚNICO DE AUTORIZACIÓN DE PAGO (ANEXO 15) DEL SERVICIO NACIONAL DEL SISTEMA DE REPARTO <br> (EXPRESADO EN N° DE BENEFICIARIOS )"
+)
+
+```
+
+# <img src='../images/logo.png' style='height: 47.5px; vertical-align: middle; background-color: white;'> 
+
+## Row
+
+### 
+
+<img src="../images/Reparto.png" alt="Sistema Reparto" style="max-width: 100%;"/>
+
+# `r menu[1]`
+
+## Row {data-height="800"}
+
+### `r titles[1]`
+
+```{r}
+graf_img(graf_titular_derecho(cantidad$bar, with_total = TRUE))
+```
+
+## Row 
+
+###  {data-width="650"}
+
+```{r}
+data_table(cantidad$table,
+           source = 'UTI',
+           other = paste0('Número de población del mes de ', 
+                          monto$month,' de las gestiones ',
+                          paste0(cantidad$gestions_names,collapse = "-")))
+```
+
+###  {data-width="350"}
+
+```{r}
+#grafico_pie(cantidad$pie, name_pie = cantidad$month)
+grafico_pie(genero$pie, name_pie = monto$month)
+```
+
+# `r menu[2]`
+
+## Row {data-height="800"}
+
+### `r titles[2]`
+
+```{r}
+graf_img(graf_titular_derecho(monto$bar,with_total = TRUE))
+```
+
+## Row
+
+###  {data-width="650"}
+
+```{r}
+data_table(monto$table,
+           source = 'UTI',
+           other = paste0('Monto acumulado al mes de ', 
+                          monto$month,' de las gestiones ', 
+                          paste0(monto$gestions_names,collapse = "-")))
+```
+
+###  {data-width="350"}
+
+```{r}
+grafico_pie(monto$pie, name_pie = monto$month)
+```
+
+# `r menu[3]`
+
+## Row {data-height="800"}
+
+### `r titles[3]`
+
+```{r}
+graf_img(graf_cantidad_monto(cantMont$bar))
+```
+
+## Row 
+
+### 
+
+```{r}
+data_table(cantMont$table,
+           source = 'UTI',
+           other = paste0('Monto acumulado al mes de ', 
+                          monto$month, ' de las gestiones ', 
+                          paste0(monto$gestions_names,collapse = "-")))
+```
+
+# `r menu[4]`
+
+## Row {data-height="800"}
+
+### `r titles[4]`
+
+```{r}
+graf_img(graf_sexo(genero$bar))
+```
+
+## Row 
+
+###  {data-width="650"}
+
+```{r}
+data_table(genero$table,
+           source = 'UTI',
+           other = paste0('Número de población del mes de ', 
+                          monto$month, ' de las gestiones ', 
+                          paste0(genero$gestions_names,collapse = "-")))
+```
+
+###  {data-width="350"}
+
+```{r}
+grafico_pie(genero$pie, name_pie = monto$month)
+```
+
+# `r menu[5]`
+
+## Row {data-height="800"}
+
+### `r titles[5]`
+
+```{r}
+graf_img(graf_departamento(departamento$bar))
+```
+
+## Row 
+
+###  {data-width="650"}
+
+```{r}
+data_table_simple(departamento$table,source = "UTI")
+```
+
+###  {data-width="350"}
+
+```{r}
+grafico_pie_dep(departamento$bar, name_pie = monto$month)
+```
+
+# `r menu[6]`
+
+## Row {data-height="800"}
+
+### `r titles[6]`
+
+```{r}
+graf_img(graf_pago(regular$bar))
+```
+
+## Row 
+
+### 
+
+```{r}
+data_table(regular$table,
+           source = 'UNO-UTI',
+           other = paste0('Monto acumulado al mes de ', 
+                          monto$month, ' de las gestiones ', 
+                          paste0(monto$gestions_names,collapse = "-")))
+```
+
+# `r menu[7]`
+
+## Row {data-height="800"}
+
+### `r titles[7]`
+
+```{r}
+graf_img(graf_pago(domicilio$bar))
+```
+
+## Row 
+
+### 
+
+```{r}
+data_table(domicilio$table, 
+           source = 'UNO-UTI',
+           other = paste0('Monto acumulado al mes de ', 
+                          monto$month, ' de las gestiones ', 
+                          paste0(monto$gestions_names,collapse = "-")))
+```
+
+# `r menu[8]`
+
+## Row {data-height="800"}
+
+### `r titles[8]`
+
+```{r}
+graf_img(graf_pago(abono$bar))
+```
+
+## Row 
+
+### 
+
+```{r}
+data_table(abono$table,
+           source = 'UNO-UTI',
+           other = paste0('Monto acumulado al mes de ', 
+                          monto$month, ' de las gestiones ', 
+                          paste0(monto$gestions_names,collapse = "-")))
+```
+
+# `r menu[9]`
+
+## Row {data-height="800"}
+
+### `r titles[9]`
+
+```{r}
+graf_img(graf_pago(poder$bar))
+```
+
+## Row 
+
+### 
+
+```{r}
+data_table(poder$table,
+           source = 'UNO-UTI',
+           other = paste0('Monto acumulado al mes de ', 
+                          monto$month, ' de las gestiones ', 
+                          paste0(monto$gestions_names,collapse = "-")))
+```
+
+# `r menu[10]`
+
+## Row {data-height="800"}
+
+### `r titles[10]`
+
+```{r}
+graf_img(graf_pago(anexo$bar,total = FALSE))
+```
+
+## Row 
+
+### 
+
+```{r}
+data_table(anexo$table,
+           source = 'UNO',
+           other = 'Comprende impedimento, hospitalización y fallecimiento',
+           title_other = 'Anexo 15: ')
+```

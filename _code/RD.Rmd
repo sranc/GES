@@ -94,6 +94,9 @@ Sistema Reparto { .hidden}
 {.sidebar}
 -----------------------------------------------------------------------
 
+<a href="#inicio">
+  <img src='images/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+</a>
 [Población de Rentistas](#beneficiarios)
 [Monto Desembolsado](#montos)
 [Monto vs Beneficiario](#montobeneficiario)
@@ -104,7 +107,7 @@ Row
 
 ### 
 
-<img src="../_data/RD.png" alt="Sistema Reparto" style="max-width: 100%;">
+<img src="images/RD.png" alt="Sistema Reparto" style="max-width: 100%;">
 
 Beneficiarios { .hidden}
 =======================================================================
@@ -113,7 +116,9 @@ Beneficiarios { .hidden}
  {.sidebar}
 -----------------------------------------------------------------------
 
-
+<a href="#inicio">
+  <img src='images/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+</a>
 [Población de Rentistas](#beneficiarios)
 [Monto Desembolsado](#montos)
 [Monto vs Beneficiario](#montobeneficiario)
@@ -155,7 +160,9 @@ Montos { .hidden}
  {.sidebar}
 -----------------------------------------------------------------------
 
-
+<a href="#inicio">
+  <img src='images/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+</a>
 [Población de Rentistas](#beneficiarios)
 [Monto Desembolsado](#montos)
 [Monto vs Beneficiario](#montobeneficiario)
@@ -196,7 +203,9 @@ Montobeneficiario { .hidden}
  {.sidebar}
 -----------------------------------------------------------------------
 
-
+<a href="#inicio">
+  <img src='images/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+</a>
 [Población de Rentistas](#beneficiarios)
 [Monto Desembolsado](#montos)
 [Monto vs Beneficiario](#montobeneficiario)
@@ -231,7 +240,9 @@ Genero { .hidden}
  {.sidebar}
 -----------------------------------------------------------------------
 
-
+<a href="#inicio">
+  <img src='images/logo.png' style='height: 50px; vertical-align: middle; background-color: white;'>
+</a>
 [Población de Rentistas](#beneficiarios)
 [Monto Desembolsado](#montos)
 [Monto vs Beneficiario](#montobeneficiario)

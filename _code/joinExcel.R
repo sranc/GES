@@ -52,7 +52,7 @@ DataCombine <- function(area,output_parquet_name) {
   write_parquet(merged_data, paste0(directory_path_out,"/", output_parquet_name,".parquet"))
 }
   
-  area <- "SR"
+  area <- "Fc"
   output_parquet_name <- "2024"
 
   DataCombine(area, output_parquet_name)
