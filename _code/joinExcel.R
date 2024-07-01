@@ -52,13 +52,13 @@ DataCombine <- function(area,output_parquet_name) {
   write_parquet(merged_data, paste0(directory_path_out,"/", output_parquet_name,".parquet"))
 }
   
-  area <- "Fc"
+  area <- "UJ"
   output_parquet_name <- "2024"
 
   DataCombine(area, output_parquet_name)
 
-  cc_data <- read_parquet("_data/sr/data/2024.parquet")
-  view(cc_data)
+  data <- read_parquet(paste0("_data/",area,"/data/",output_parquet_name,".parquet"))
+  view(data)
   
   join_parquet_to_excel <- function(data_to_excel,direction) {
     data_excel <- data_format_convert(data_to_excel)
