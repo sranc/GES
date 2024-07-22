@@ -1,5 +1,5 @@
 ---
-title: "Compensacion de Cotizaciones"
+title: "COMPENSACIÓN DE COTIZACIONES"
 output: 
   flexdashboard::flex_dashboard:
     orientation: rows

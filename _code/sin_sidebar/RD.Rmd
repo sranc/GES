@@ -1,5 +1,5 @@
 ---
-title: "Renta Dignidad"
+title: "RENTA DIGNIDAD"
 output: 
   flexdashboard::flex_dashboard:
     orientation: rows

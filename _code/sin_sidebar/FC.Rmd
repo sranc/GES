@@ -120,7 +120,7 @@ data_table(tamano$table,
            source = 'UFCA',
            other = paste0('Número de población del mes de ', 
                           tamano$month,' de las gestiones ',
-                          paste0(tamano$gestions_name,collapse = "-")))
+                          paste0(tamano$gestion_name,collapse = "-")))
 ```
 
 # `r menu[2]`
@@ -142,7 +142,7 @@ data_table(tipo$table,
            source = 'UFCA',
            other = paste0('Monto acumulado al mes de ', 
                           tipo$month,' de las gestiones ', 
-                          paste0(tipo$gestions_name,collapse = "-")))
+                          paste0(tipo$gestion_name,collapse = "-")))
 ```
 
 # `r menu[3]`
