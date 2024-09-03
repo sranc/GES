@@ -1,0 +1,171 @@
+---
+title: "FISCALIZACIÓN Y COBRO DE ADEUDOS"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    vertical_layout: fill
+    theme : 
+      version : 3
+      base_font: 
+        google: Prompt
+      heading_font:
+        google: Sen
+      code_font:
+        google: 
+          # arguments to sass::font_google() 
+          family: JetBrains Mono
+          local: false
+    css: styles.css
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+pacman::p_load(
+  tidyverse,
+  readxl,
+  dplyr,
+  sparklyr,
+  ggplot2,
+  plotly,
+  DT,
+  scales,
+  arrow,
+  crosstalk,
+  shiny,
+  htmltools,
+  echarts4r,
+  kableExtra,
+  base64enc,
+  knitr
+)
+
+source("../_functions/FC.R",local = TRUE)
+source("../_graphs/FC.R",local = TRUE)
+
+dir <- "../../_data/fc/data"
+
+data <- join_gestions(dir)
+
+tamano <- consulta(data, type_resp = "tamano")
+tipo <- consulta(data, type_resp = "tipo")
+comportamiento <- consulta(data, type_resp = "comportamiento")
+
+
+knitr::include_graphics("../images/bg.jpeg")
+img_path <- "../images/bg.jpeg"  # Ruta de tu imagen
+img_base64 <- base64enc::base64encode(img_path)
+
+graf_img <- function(graf){
+  div(
+  style = sprintf(
+    "display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    background-image: url('data:image/png;base64,%s'); 
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-position: center; 
+    height: 100%%; 
+    width: 100%%; 
+    overflow: hidden;
+    padding: 0; 
+    margin: 0;",
+    img_base64
+  ),
+  p(
+    style = "padding: 0 5px; margin: 0;",
+    graf
+    )
+)
+}
+
+menu <- c("EMPRESAS POR TAMAÑO",
+          "EMPRESAS POR TIPO",
+          "COMPORTAMIENTO Y MONTO"
+          )
+
+titles <- c("NÚMERO DE FISCALIZACIONES A EMPRESAS E INSTITUCIONES (POR TAMAÑO)",
+            "NÚMERO DE FISCALIZACIONES A EMPRESAS PRIVADAS E INSTITUCIONES PÚBLICAS",
+            "COMPORTAMIENTO EN N° DE FISCALIZACIONES  Y MONTO DE RECUPERACIÓN DE APORTES DEVENGADOS A LA SEGURIDAD SOCIAL <br> (EXPRESADO EN MILLONES DE BOLIVIANOS)"
+            )
+
+```
+
+# <img src='../images/logo.png' style='height: 47.5px; vertical-align: middle; background-color: white;'> 
+
+## Row
+
+### 
+
+<img src="../images/FCA.png" alt="Sistema Reparto" style="max-width: 100%;"/>
+
+# `r menu[1]`
+
+## Row {data-height="800"}
+
+### `r titles[1]`
+
+```{r}
+graf_img(grafica(tamano$bar, with_total = TRUE))
+```
+
+## Row 
+
+###  
+
+```{r}
+data_table(tamano$table,
+           source = 'UFCA',
+           other = paste0('Número de población del mes de ', 
+                          tamano$month,' de las gestiones ',
+                          paste0(tamano$gestion_name,collapse = "-")))
+```
+
+# `r menu[2]`
+
+## Row {data-height="800"}
+
+### `r titles[2]`
+
+```{r}
+graf_img(grafica(tipo$bar, with_total = TRUE))
+```
+
+## Row 
+
+### 
+
+```{r}
+data_table(tipo$table,
+           source = 'UFCA',
+           other = paste0('Monto acumulado al mes de ', 
+                          tipo$month,' de las gestiones ', 
+                          paste0(tipo$gestion_name,collapse = "-")))
+```
+
+# `r menu[3]`
+
+## Row {data-height="800"}
+
+### `r titles[3]`
+
+```{r}
+graf_img(grafica(comportamiento$bar, with_total = TRUE))
+```
+
+## Row 
+
+### 
+
+```{r}
+data_table(comportamiento$table,
+           source = 'UFCA',
+           other = paste0('Monto acumulado al mes de ', 
+                          comportamiento$month, ' de las gestiones ', 
+                          paste0(comportamiento$gestion_name,collapse = "-")))
+```
+
+

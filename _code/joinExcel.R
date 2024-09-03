@@ -7,7 +7,7 @@
 #   - Crea un directorio "_data/area/data" para almacenar el archivo Parquet resultante.
 #   - Guarda el archivo Parquet combinado en el directorio especificado.
 #   - No devuelve ningún valor, pero proporciona mensajes informativos durante la ejecución.
-DataCombine <- function(area,output_parquet_name) {
+DataCombine <- function(area,gestion,month) {
   # Instalar los paquetes si no están instalados
   if (!requireNamespace("tidyverse", quietly = TRUE)) {
     install.packages("tidyverse")
@@ -24,7 +24,8 @@ DataCombine <- function(area,output_parquet_name) {
   data_list <- list()
 
   # Leer cada archivo Excel y agregar la columna de bd
-  directory_path_in <- paste0("_data/",area,"/temporal")
+  directory_path_in <- paste0("_excel/",gestion,"/",month,"/",area)
+  output_parquet_name <- gestion
   
   for (excel_file in list.files(path = directory_path_in, pattern = "*.xlsx", full.names = TRUE)) {
     
@@ -52,20 +53,16 @@ DataCombine <- function(area,output_parquet_name) {
   write_parquet(merged_data, paste0(directory_path_out,"/", output_parquet_name,".parquet"))
 }
   
-  area <- "UJ"
-  output_parquet_name <- "2024"
-
-  DataCombine(area, output_parquet_name)
-
-  data <- read_parquet(paste0("_data/",area,"/data/",output_parquet_name,".parquet"))
-  view(data)
+  #########################################################################################################
   
   join_parquet_to_excel <- function(data_to_excel,direction) {
+    library("openxlsx")
     data_excel <- data_format_convert(data_to_excel)
     data_excel <- data_excel %>% 
-      filter(!is.na(cantidad))
-    write.xlsx(data_excel,paste0("_data/",direction,sep = ""))
+      filter(!is.na(cantidad) & cantidad != 0)
+    write.xlsx(data_excel,direction)
   }
   
-  join_parquet_to_excel(cc_data,"sr/sr.xlsx")
+  
+
   
