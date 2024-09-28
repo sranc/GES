@@ -96,7 +96,7 @@ body <- dashboardBody(
   ),
   fluidRow(
     tabBox(
-      title = "SR",
+      title = "",
       id = "tabset1", width = 12,
       
       tabPanel("COMPENSACIÓN DE COTIZACIONES",

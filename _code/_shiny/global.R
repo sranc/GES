@@ -17,7 +17,7 @@ ruta_base <- "../../_excelOutput/"
 
 if(file.exists(ruta_base)){
   lista_datos <- cargar_y_renombrar_datos(ruta_base, archivos, nuevos_nombres)
-  save(lista_datos, file = "_datos/lista_datos.RData")
+  save(lista_datos, file = "datos/lista_datos.RData")
 }else{
   load("datos/lista_datos.Rdata")
 }

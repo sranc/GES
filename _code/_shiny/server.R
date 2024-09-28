@@ -1,6 +1,7 @@
 library(shiny)
 library(shinydashboard)
 library(shinyjs)
+library(echarts4r)
 
 server <- function(input, output) {
   
@@ -50,7 +51,7 @@ server <- function(input, output) {
   output$widget3 <- renderValueBox({
     valueBox(
       value = valor3,
-      subtitle = "N° Beneficiarios RD",
+      subtitle = "N° Beneficiarios SR",
       icon = icon("user-check"),
       color = "yellow"
     )
@@ -59,7 +60,7 @@ server <- function(input, output) {
   output$widget4 <- renderValueBox({
     valueBox(
       value = valor4,
-      subtitle = "Monto Desembolsado RD",
+      subtitle = "Monto Desembolsado SR",
       icon = icon("piggy-bank"),
       color = "purple"
     )
