@@ -27,12 +27,11 @@ graf_uno <- function(data){
              fontSize = 16,
              formatter  =  htmlwidgets::JS("
                 function(params){
-                   value = params.value[1];
-                   value = parseInt(value,10);
-                   value_format = value.toLocaleString();
-                return(
-                  value_format
-                ) }
+                  var value = params.value[1];
+                  var parts = value.toString().split('.');
+                  parts[0] = parts[0].replace(/\\B(?=(\\d{3})+(?!\\d))/g, ',');
+                  return parts.join('.');
+                }
                 ")) |>
     # Marca el área de las barras
     e_mark_area(data = list(list(xAxis = 0),
@@ -150,8 +149,7 @@ graf_dos <- function(data,with_total = FALSE){
     # Agrega función de descarga de imagen
     e_toolbox_feature(feature = "saveAsImage") |>
     # Configura leyenda
-    e_legend(orient = "horizontal", top = "bottom", padding = c(0,0)) %>% 
-    e_axis_labels(x = "Mes")
+    e_legend(orient = "horizontal", top = "bottom", padding = c(0,0)) 
   return(grafi)
 }
 

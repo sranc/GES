@@ -41,7 +41,7 @@ pacman::p_load(
   base64enc,
   knitr
 )
-
+Sys.setlocale("LC_ALL", "es_ES.UTF-8")
 source("../_functions/FC.R",local = TRUE)
 source("../_graphs/FC.R",local = TRUE)
 

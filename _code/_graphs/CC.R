@@ -7,7 +7,7 @@ bar_graph <- function(data, process = "start", theme_show = "default") {
   if (process == "start") {
     graf <- graf %>% 
       e_bar(REGIONALES,
-            itemStyle = list( color = "#073767",
+            itemStyle = list( color = "#FFC502",
                               borderRadius = 15,
                               shadowColor = "black",
                               shadowBlur = 20),
@@ -26,7 +26,7 @@ bar_graph <- function(data, process = "start", theme_show = "default") {
     graf <- graf %>% 
       e_bar(OFICINA_CENTRAL, 
             seriesName = "Oficina central", 
-            itemStyle = list(color = "#FFC502",
+            itemStyle = list(color = "#073767",
                              borderRadius = 10,
                              shadowColor = "black",
                              shadowBlur = 10),
@@ -47,7 +47,7 @@ bar_graph <- function(data, process = "start", theme_show = "default") {
     graf <- graf %>% 
       e_bar(GLOBAL,
             seriesName = "GLOBAL",
-            itemStyle = list( color = "#073767",
+            itemStyle = list( color = "#FFC502",
                               borderRadius = 15,
                               shadowColor = "black",
                               shadowBlur = 20),
@@ -66,7 +66,7 @@ bar_graph <- function(data, process = "start", theme_show = "default") {
     graf <- graf %>% 
       e_bar(MENSUAL, 
             seriesName = "MENSUAL", 
-            itemStyle = list(color = "#FFC502",
+            itemStyle = list(color = "#073767",
                              borderRadius = 10,
                              shadowColor = "black",
                              shadowBlur = 10),

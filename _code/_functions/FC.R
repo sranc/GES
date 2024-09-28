@@ -122,7 +122,13 @@ consulta <- function(data,type_resp) {
     mutate_if(is.numeric, ~replace(., is.na(.), 0))
   if(type_resp == "tamano"){
     result <- result %>% 
-      select(gestion,mes,`Pequeñas`,Grandes)
+      select(gestion,mes,`Pequeñas`,Grandes)  %>% 
+      group_by(gestion) %>% 
+      mutate(
+        Pequeñas = cumsum(Pequeñas),
+        Grandes = cumsum(Grandes)
+      ) %>% 
+      ungroup()
     result <- data_to_show(result,
                          init = "Pequeñas",
                         fin = "TOTAL",
@@ -130,7 +136,13 @@ consulta <- function(data,type_resp) {
   }
   if(type_resp == "tipo"){
     result <- result %>% 
-      select(gestion,mes,Privada,Publica)
+      select(gestion,mes,Privada,Publica)  %>% 
+      group_by(gestion) %>% 
+      mutate(
+        Privada = cumsum(Privada),
+        Publica = cumsum(Publica)
+      ) %>% 
+      ungroup()
     result <- data_to_show(result,
                            init = "Privada",
                            fin = "TOTAL",
@@ -138,7 +150,13 @@ consulta <- function(data,type_resp) {
   }
   if(type_resp == "comportamiento"){
     result <- result %>% 
-      select(gestion,mes, FISCALIZACIONES, `RECUPERACIÓN Bs`)
+      select(gestion,mes, FISCALIZACIONES, `RECUPERACIÓN Bs`) %>% 
+      group_by(gestion) %>% 
+      mutate(
+        FISCALIZACIONES = cumsum(FISCALIZACIONES),
+        `RECUPERACIÓN Bs` = cumsum(`RECUPERACIÓN Bs`)
+      ) %>% 
+      ungroup()
     result <- data_to_show(result,
                            init = "FISCALIZACIONES",
                            fin = "RECUPERACIÓN Bs",

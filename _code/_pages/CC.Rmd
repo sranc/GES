@@ -49,7 +49,7 @@ cc_data <- join_gestions(cc_dir)
 start_process_data <- process(cc_data,data_type = "inicial")
 compensation_process_data <- process(cc_data,data_type = "certificado",filter_data = "EMISION DE CERTIFICADOS DE CC")
 compensation_AFP_process_data <- process(cc_data,data_type = "certificado",filter_data = "REGISTRO DE CERTIFICADOS DE CC EN LA AFP")
-curso_pago_process_data <- process_n(cc_data, filter_data = "Tipo de CC", mes = start_process_data$pie$MES[1])
+curso_pago_process_data <- process_n(cc_data, filter_data = "Tipo de CC", mes = substr(start_process_data$pie$MES[1], 1, 3))
 mont_data <- process_mont(cc_data, filter_data = "Tipo de Renta")
 sex_process_data <- process_sex(cc_data,filter_clase = "Tipo de Renta",filter_bd = "Cantidad")
 altas_futuro <- process_altas(cc_data,filter_tipo = "AFP FUTURO")
@@ -200,7 +200,7 @@ grafico_pie(compensation_AFP_process_data$pie,theme_show = "dark", name_pie = st
 
 ## ow {data-height=800}
 
-### `r titles[4]`
+### `r titles[4]` 
 
 ```{r}
 graf_img(graf_curso(curso_pago_process_data$bar))
