@@ -159,7 +159,7 @@ pagos_beneficiarios <- function(result) {
   result <- result %>% 
     group_by(gestion) %>% 
     mutate(Monto = cumsum(Monto)) %>% 
-    mutate(Monto_sim = round(Monto/10^6)) %>%  
+    mutate(Monto_sim = round(Monto/10^6,2)) %>%  
     ungroup()
   return(result)
 }

@@ -12,7 +12,7 @@ source("_code/_functions/JoGe.R")
 
 
 gestion <- 2024
-mes <- "JUNIO"
+mes <- "AGOSTO"
 
 dataset_names <- c("CC", "FC", "RD", "SR", "UJ")
 
